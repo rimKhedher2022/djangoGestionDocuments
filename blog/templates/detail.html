@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-8">
+            <h1 class="text-center mt-2">detail du document</h1>
+            <h1>{{document.titre}}</h1>
+            <a href="{{ document.fichier.url }}">link</a>
+            <p>{{document.description}}</p>
+
+        </div>
+        <div class="col-md-4">
+            <h3 class="mt-2">Les autres {{document.categorie}}</h3>
+            <div class="row">
+
+                
+            
+                    {%for doc in der %}
+                     
+                       {% if doc.id != document.id %}
+                      <div class="col-md-8 mb-1">
+                        
+                       <a href="{{doc.id}}"><strong>{{doc.titre}}</strong></a>
+
+                      </div>
+                      <div class="col-4">
+                        <a href="{{doc.fichier.url}}">{{doc.fichier}}</a>
+                        
+
+
+                      </div>
+                      {% endif %}
+                    {%endfor%}
+
+            </div>
+        </div>
+    </div>
+
+</div>
+{% endblock %}

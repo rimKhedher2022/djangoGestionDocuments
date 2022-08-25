@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+<h1 class="text-center mt-4">Bienvenue dans la plateforme DOCU </h1>
+<div class="container">
+  <div class="row">
+    {% for document in liste_documents %}
+    <div class="col-12 col-md-6 col-lg-3 col-xl-3 mb-3">
+      <div class="card p-2">
+
+
+
+        <div class="card-body" style="height:270px;">
+
+
+          <h6>{{document.titre}}</h6>
+          <h5 class="card-title">{{document.categorie}}</h5>
+          <a href="{{ document.fichier.url }}">{{document.fichier}}</a>
+          <p class="card-text">{{document.description|truncatewords:8}}</p>
+          <p class="card-text">Publié il y'a {{document.created_at|timesince}}</p>
+          <a href="{% url 'detail' document.id %}" class="btn btn-primary">lire la suite</a>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
+{% endblock %}
+
+
+  
+  
+
+   
+
+
+ 
+</body>
+</html>
+
+
+
+
+
