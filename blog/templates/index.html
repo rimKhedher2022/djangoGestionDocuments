@@ -12,14 +12,16 @@
 
 
 
-        <div class="card-body" style="height:270px;">
+        <div class="card-body" style="height:300px;">
 
 
           <h6>{{document.titre}}</h6>
           <h5 class="card-title">{{document.categorie}}</h5>
           <a href="{{ document.fichier.url }}">{{document.fichier}}</a>
           <p class="card-text">{{document.description|truncatewords:8}}</p>
-          <p class="card-text">Publié il y'a {{document.created_at|timesince}}</p>
+          <h6>{{document.matiére}}</h6>
+          
+          <p >Publié il y'a {{document.created_at|timesince}}</p>
           <a href="{% url 'detail' document.id %}" class="btn btn-primary">lire la suite</a>
         </div>
       </div>
