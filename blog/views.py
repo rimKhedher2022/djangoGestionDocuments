@@ -1,11 +1,16 @@
+from ast import keyword
 from multiprocessing import context
 from pydoc import doc
 from turtle import title
 from django.shortcuts import render
 from .models import Document
-
+import PyPDF2
+import fitz
+import os
+from django.core.files.storage import default_storage
 
 def home(request):
+    
     list_documents=Document.objects.all()
     context={"liste_documents":list_documents}
  
@@ -19,10 +24,22 @@ def detail(request,id_document):
     documents_en_relations= Document.objects.filter(categorie=categorie)
    
     return render(request,"detail.html",{"document":document,"der":documents_en_relations})
+    
+# def look(fichier,word):
+        
+    
+           
 
 def search(request):
     query=request.GET["document"] 
     # la valeur qui peut etre un mot (ex:café) ==> query
-    liste_document_search=Document.objects.filter(titre__icontains=query) or Document.objects.filter(description__contains=query)
+    
+   # file1=open(f.fichier.path,"r",encoding="latin-1")
+        # if query in file1.read():
+        #     print("true")
+
+    liste_document_search=Document.objects.filter(titre__icontains=query) 
+    
     return render(request,"search.html",{"liste_document_search":liste_document_search})
-   
+    
+
