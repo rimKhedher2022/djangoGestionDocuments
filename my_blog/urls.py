@@ -27,6 +27,7 @@ urlpatterns = [
     path('document/<int:id_document>',detail,name="detail"),
     path('document/recherche',search,name="search"),
     path('auth/',include('app_auth.urls')),
+    path('my-admin/',include('app_admin.urls')),
     
 
 ]+static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

@@ -1,0 +1,44 @@
+<nav class="mb-1 navbar navbar-expand-lg navbar-dark default-color">
+    <a class="navbar-brand font-bold" href="#">tbd</a>
+    
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-4"
+        aria-controls="navbarSupportedContent-333" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSuapportedContent-333">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item activate">
+                
+                <a class="nav-link" href="{% url 'home' %}">acceuil
+                    <span class="sr-only">(current)</span>
+                </a>
+            </li>
+            
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'mes-documents' %}">mes documents</a>
+            </li>
+        </ul>
+
+
+        <ul class="navbar-nav ml-auto nav-flex-icons"> 
+            {% if user.is_authenticated %} 
+            <li class="nav-item">
+                <a class="nav-link">{{user.username}}</a>
+            </li>  
+            
+            {% endif %}
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-333" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                    <i class="fa fa-user"></i> Profile
+                 </a>
+                <div class="dropdown-menu dropdown-menu-right dropdown-cyan" aria-labelledby="navbarDropdownMenuLink-333">
+                    {% if user.is_authenticated %}
+                    <!-- <a class="dropdown-item" href="#">My account</a> -->
+                    <a class="dropdown-item" href="#">déconnexion</a>
+                    {%endif%}
+                </div>
+            </li>
+        </ul>
+    </div>
+</nav>

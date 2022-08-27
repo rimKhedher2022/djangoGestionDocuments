@@ -1,0 +1,52 @@
+{% extends 'partials/base.html'%}
+
+
+{% block content%}
+<h2 class="text-center mt-4">mes documents</h2>
+<div class="container">
+    <div class="row">
+        
+        <div class="col-md-12">
+            <a href="" class="btn btn-secondary float-right"><i class="fas fa-plus"></i>  ajouter document</a>
+        </div>
+
+         
+            {% if liste_documents %}
+            {% for document in liste_documents %}
+<!--             
+            <div class="col-md-12"> 
+
+            
+                <div class="card mt-3"> -->
+         <div class="col-12 col-md-6 col-lg-3 col-xl-3 mb-3">
+            <div class="card p-2">
+          
+          
+          
+                  <div class="card-body" style="height:320px;">
+          
+          
+                    <h6>{{document.titre}}</h6>
+                    <h5 class="card-title">{{document.categorie}}</h5>
+                    <a href="{{ document.fichier.url }}">{{document.fichier}}</a>
+                    <p class="card-text">{{document.description|truncatewords:8}}</p>
+                    <h6>{{document.matiére}}</h6>
+                    
+                    <p >Publié il y'a {{document.created_at|timesince}}</p>
+                    <a href="{% url 'detail' document.id %}" class="btn btn-primary">lire la suite</a>
+                  </div>
+                </div>
+            </div> 
+              
+
+
+
+               {% endfor %}
+               {% else %}
+               <h2>Vous n'avez aucun document</h2>
+               {% endif %}
+
+         
+    </div>
+</div>
+{% endblock %}

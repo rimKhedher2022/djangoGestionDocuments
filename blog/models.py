@@ -1,5 +1,6 @@
 from distutils.command import upload
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here.
 class Categorie(models.Model):
@@ -10,6 +11,7 @@ class Categorie(models.Model):
         return self.titre_categorie 
 
 class Document(models.Model):
+    user=models.ForeignKey(User,on_delete=models.CASCADE,null=True) 
     titre=models.CharField(max_length=50)
     description=models.TextField()
     fichier=models.FileField()
