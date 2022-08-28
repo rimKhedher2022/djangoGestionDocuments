@@ -18,8 +18,12 @@
     <link rel="stylesheet" href="{% static 'css/mdb.min.css' %}">
     <!-- Your custom styles (optional) -->
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
 </head>
 <body>
+
+
+   
     {% include '_navadmin.html' %}
 
     {% block content %}
@@ -27,7 +31,7 @@
     {% endblock%}
 
 
-
+{% block script %}
     
      <!-- jQuery -->
   <script type="text/javascript" src="{%static 'js/jquery.min.js' %}"></script>
@@ -39,5 +43,7 @@
   <script type="text/javascript" src="{%static 'js/mdb.min.js' %}"></script>
   <!-- Your custom scripts (optional) -->
   <script type="text/javascript"></script>
+ 
+{% endblock %}
 </body>
 </html>

@@ -1,5 +1,22 @@
 {% extends 'partials/base.html'%}
 
+{% block script %}
+<!-- <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script> -->
+<!-- <script>
+    const ajouter=()=>
+    {
+                Swal.fire({
+            title: 'ajout',
+            text: 'le document est ajouté avec success',
+            icon: 'success',
+            confirmButtonText: 'ok'
+            });
+    }
+   
+
+</script> -->
+{% endblock %}
+
 {% block content%}
 
 <div class="container">
@@ -9,9 +26,11 @@
             <form action="" method="POST" enctype="multipart/form-data">
                 {% csrf_token %}
                 {{form}}
-                <button class="btn btn-primary btn-block">Enregistrer</button>
+                <button class="btn btn-primary btn-block" >Enregistrer</button>
             </form>
            
+       
+
         </div>
     </div>
 </div>

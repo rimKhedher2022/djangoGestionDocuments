@@ -20,17 +20,16 @@
                     {%for doc in der %}
                      
                        {% if doc.id != document.id %}
-                      <div class="col-md-8 mb-1">
+                       <div style="width:600px; height:150px;" class="card mb-2"  >
+                      <div class="col-4 col-md-8 mb-1">
                         
                        <a href="{{doc.id}}"><strong>{{doc.titre}}</strong></a>
 
                       </div>
-                      <div class="col-4">
+                      <div class="col-12">
                         <a href="{{doc.fichier.url}}">{{doc.fichier}}</a>
-                        
-
-
                       </div>
+                    </div>
                       {% endif %}
                     {%endfor%}
 

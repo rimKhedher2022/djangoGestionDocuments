@@ -5,6 +5,7 @@ from blog.models import Document
 from blog.forms import DocumentForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django import forms
+from django.contrib import messages
 
 
 def dashboard(request):
@@ -28,13 +29,24 @@ class addDocument(CreateView):
     form_class = DocumentForm
     template_name= "ajouter_document.html"
     success_url="mes-documents" 
+   
 
 
     def form_valid(self,form):
         form.instance.user = self.request.user
         return super().form_valid(form)
 
+class UpdateDocument(UpdateView):
+    model = Document
+    form_class = DocumentForm
+    template_name = 'app_admin/document_form.html'
+    success_url= '/my-admin/mes-documents'
+   
+
+class DeleteDocument(DeleteView):
+    model = Document
+    # form_class = DocumentForm
+    template_name = 'app_admin/supprimer_form.html'
+    success_url= '/my-admin/mes-documents'
     
 
-
- 

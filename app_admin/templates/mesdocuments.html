@@ -1,7 +1,13 @@
+
 {% extends 'partials/base.html'%}
 
 
 {% block content%}
+
+    
+ 
+  
+
 <h2 class="text-center mt-4">Mes documents</h2>
 <div class="container">
     <div class="row">
@@ -41,14 +47,14 @@
                         <tbody>
                             {% for document in liste_documents%}
                             <tr>
-                                <td class="h6">{{document.titre}}</td>
+                                <td class="h6"><a href="{% url 'detail' document.id %}">{{document.titre}}</a></td>
                                 <td class="h6">{{document.annee}}</td>
                                 <td class="h6">{{document.matiére}}</td>
                                 <td class="h6">{{document.categorie}}</td>
                                 <td class="h6">{{document.institution}}</td>
                                 <td class="h6">
-                                    <a class="btn btn-info btn-sm"><i class="fas fa-edit"></i></a>
-                                    <a class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></a>
+                                    <a class="btn btn-default btn-rounded btn-sm" href="{% url 'modifier-document' document.pk %}"><i class="fas fa-edit"></i></a>
+                                    <a class="btn btn-danger btn-rounded btn-sm" href="{% url 'supprimer-document' document.pk %}"><i class="fas fa-trash"></i></a>
                                    
     
                                  </td>
