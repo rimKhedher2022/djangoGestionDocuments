@@ -14,7 +14,7 @@ class Document(models.Model):
     user=models.ForeignKey(User,on_delete=models.CASCADE,null=True) 
     titre=models.CharField(max_length=50)
     description=models.TextField()
-    fichier=models.FileField()
+    fichier=models.FileField(null=True,blank=True)
     institution=models.CharField(max_length=100)
     annee=models.CharField(max_length=4)
     matiére=models.CharField(max_length=50)
