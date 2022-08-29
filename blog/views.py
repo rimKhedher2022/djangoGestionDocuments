@@ -20,8 +20,8 @@ def home(request):
 
 def detail(request,id_document):
     document=Document.objects.get(id=id_document)
-    categorie=document.categorie
-    documents_en_relations= Document.objects.filter(categorie=categorie)
+    Subcategorie=document.Subcategorie
+    documents_en_relations= Document.objects.filter(Subcategorie=Subcategorie)
    
     return render(request,"detail.html",{"document":document,"der":documents_en_relations})
     

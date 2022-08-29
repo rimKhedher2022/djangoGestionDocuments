@@ -6,7 +6,7 @@ from django.urls import reverse
 #  ??????????
 
 # Create your models here.
-class Categorie(models.Model):
+class Subcategorie(models.Model):
    titre_categorie=models.CharField(max_length=50)
    desc=models.TextField()
 
@@ -23,7 +23,7 @@ class Document(models.Model):
     matiére=models.CharField(max_length=50)
     created_at=models.DateTimeField(auto_now_add=True)
     updated_at=models.DateTimeField(auto_now=True)
-    categorie = models.ForeignKey(Categorie,on_delete=models.CASCADE) 
+    Subcategorie = models.ForeignKey(Subcategorie,on_delete=models.CASCADE) 
     # une categorie a plusieurs documents
 
     def __str__ (self):

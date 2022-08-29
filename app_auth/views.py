@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from django.contrib import messages
 from .forms import *
 
+
 def login_toDoc(request):  
 
             # admin
@@ -16,7 +17,7 @@ def login_toDoc(request):
             user = authenticate(username=username,password=pwd)
             if user is not None:
                 login(request,user)
-                return redirect('home')
+                return redirect('dashboard')
             else:
                 messages.error(request,"Authentification échouée")
                 return render(request,'login.html',{'form':form})    

@@ -9,7 +9,7 @@
   
 
 <h2 class="text-center mt-4">Mes documents</h2>
-<div class="container">
+ <div class="container">
     <div class="row">
         
         <div class="col-md-12">
@@ -39,7 +39,7 @@
                                 <th class="h6">titre</th>
                                 <th class="h6">anneé</th>
                                 <th class="h6">matiére</th>
-                                <th class="h6">categorie</th>
+                                <th class="h6">Subcategorie</th>
                                 <th class="h6">institution</th>
                                 <th class="h6">action</th>
                             </tr>
@@ -50,7 +50,7 @@
                                 <td class="h6"><a href="{% url 'detail' document.id %}">{{document.titre}}</a></td>
                                 <td class="h6">{{document.annee}}</td>
                                 <td class="h6">{{document.matiére}}</td>
-                                <td class="h6">{{document.categorie}}</td>
+                                <td class="h6">{{document.Subcategorie}}</td>
                                 <td class="h6">{{document.institution}}</td>
                                 <td class="h6">
                                     <a class="btn btn-default btn-rounded btn-sm" href="{% url 'modifier-document' document.pk %}"><i class="fas fa-edit"></i></a>

@@ -8,4 +8,7 @@ urlpatterns=[
     path('ajouter-document',addDocument.as_view(),name="ajouter-document"),
     path('modifier-document/<int:pk>',UpdateDocument.as_view(),name="modifier-document"),
     path('supprimer-document/<int:pk>',DeleteDocument.as_view(),name="supprimer-document"),
+    path('document_sous_category/<str:soucat>',Document_sous_category,name="document_sous_category"),
+    path('modifier-souscategorie/<int:pk>',UpdateSouscategorie.as_view(),name="modifier-souscategorie"),
+    
 ]
