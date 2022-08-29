@@ -1,5 +1,5 @@
 from django import forms
-from .models import Document
+from .models import Document, Subcategorie
 
 class DocumentForm(forms.ModelForm):
     class Meta:
@@ -18,7 +18,7 @@ class DocumentForm(forms.ModelForm):
 
 class SubcategorieForm(forms.ModelForm):
     class Meta:
-        model=Document
+        model=Subcategorie
         fields=('titre_categorie','desc')
         labels={'titre_categorie':'Titre','desc':'description'}
         widgets={

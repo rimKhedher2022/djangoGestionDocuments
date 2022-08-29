@@ -8,7 +8,7 @@
         
             <h2>Liste des sous categories </h2>
             <div class="col-md-12">
-                <a href= ""    class="btn btn-secondary float-right"><i class="fas fa-plus"></i>  ajouter sous categorie</a>
+                <a href= "{% url 'ajouter-souscategorie'%}"    class="btn btn-secondary float-right"><i class="fas fa-plus"></i>  ajouter sous categorie</a>
             </div>
 
             {% if liste_souscategorie %}
@@ -19,7 +19,7 @@
 
 
 
-                    <table class="table table-hover" style="width: 500px;">
+                    <table class="table table-hover" style="width: 900px;">
                         <thead>
                             <tr>
                                 <th class="h6">sous categorie</th>
@@ -35,7 +35,7 @@
                                
                                 <td class="h6">
                                     <a class="btn btn-default btn-rounded btn-sm" href="{% url 'modifier-souscategorie' s.pk %}"><i class="fas fa-edit"></i></a>
-                                    <a class="btn btn-danger btn-rounded btn-sm" href=""><i class="fas fa-trash"></i></a>
+                                    <a class="btn btn-danger btn-rounded btn-sm" href="{% url 'supprimer-souscategorie' s.pk %}"><i class="fas fa-trash"></i></a>
                                    
     
                                  </td>

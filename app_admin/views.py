@@ -11,6 +11,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.exceptions import PermissionDenied
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404
+from django.urls import reverse_lazy
 
 def dashboard(request):
      if not request.user.is_authenticated:
@@ -51,7 +52,10 @@ class addDocument(LoginRequiredMixin,CreateView):
     model = Document
     form_class = DocumentForm
     template_name= "ajouter_document.html"
-    success_url="mes-documents" 
+    # success_url="/my-admin/document_sous_category/{% Document. %}" 
+    def get_success_url(self):
+         return reverse_lazy('document_sous_category', kwargs={'soucat': self.object.Subcategorie})
+      
    
 
 
@@ -83,3 +87,28 @@ class UpdateSouscategorie(LoginRequiredMixin,UpdateView):
     form_class = SubcategorieForm
     template_name = 'app_admin/soucategorie_form.html'
     success_url= '/my-admin'
+
+class DeleteSouscategorie(LoginRequiredMixin,DeleteView):
+    model = Subcategorie
+    # form_class = DocumentForm
+    template_name = 'app_admin/supprimerSoucat_form.html'
+    success_url= '/my-admin'
+
+    def dispatch(self, request, *args, **kwargs):
+        # if not request.user.has_perm('blog.supprimer-document'):
+        #    raise PermissionDenied
+        return super().dispatch(request, *args, **kwargs)    
+
+
+
+class addSouscategorie(LoginRequiredMixin,CreateView):
+    model = Subcategorie
+    form_class = SubcategorieForm
+    template_name= "ajouter_soucategorie.html"
+    success_url= '/my-admin'
+   
+
+
+    def form_valid(self,form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)        
