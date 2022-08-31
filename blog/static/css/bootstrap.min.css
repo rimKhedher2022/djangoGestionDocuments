@@ -2416,6 +2416,16 @@ textarea.form-control.is-invalid {
   color: #212529;
   text-decoration: none;
 }
+
+.btn-default{
+  background: transparent;
+border: 2px solid rgba(24, 160, 206, 0.75);
+border-radius:60px;
+
+}
+
+
+
 .btn.focus,
 .btn:focus {
   outline: 0;

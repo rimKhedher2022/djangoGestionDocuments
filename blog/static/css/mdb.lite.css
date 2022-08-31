@@ -2918,6 +2918,13 @@ a.waves-light {
     box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15)
 }
 
+.btn-default{
+    background: transparent;
+  border: 2px solid rgba(24, 160, 206, 0.75);
+  border-radius:60px;
+  
+}
+
 .btn.btn-block {
     margin: inherit
 }

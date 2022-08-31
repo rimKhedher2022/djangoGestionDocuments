@@ -9,9 +9,27 @@ from django.urls import reverse
 class Subcategorie(models.Model):
    titre_categorie=models.CharField(max_length=50)
    desc=models.TextField()
+   parent = models.ForeignKey(
+        'self',
+        on_delete=models.SET_NULL,
+        related_name="children",
+        null=True,
+        blank=True,
+    )
+    
 
    def __str__ (self):
-        return self.titre_categorie 
+    return self.titre_categorie
+
+   
+
+          
+     
+
+
+        
+
+
 
 class Document(models.Model):
     user=models.ForeignKey(User,on_delete=models.CASCADE,null=True) 

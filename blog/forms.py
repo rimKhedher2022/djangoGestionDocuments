@@ -1,3 +1,4 @@
+from urllib.request import urlopen
 from django import forms
 from .models import Document, Subcategorie
 
@@ -20,11 +21,31 @@ class SubcategorieForm(forms.ModelForm):
     class Meta:
         model=Subcategorie
         fields=('titre_categorie','desc')
+        # if (="")
         labels={'titre_categorie':'Titre','desc':'description'}
         widgets={
             'titre_categorie':forms.TextInput(attrs={'class':'form-control'}),
             'desc':forms.Textarea(attrs={'class':'form-control','rows':5}),
         }
 
+
+
+class SubcategorieForm1(forms.ModelForm):
+    class Meta:
+        model=Subcategorie
+        fields=('titre_categorie','desc','parent')
+        # if (="")
+        labels={'titre_categorie':'Titre','desc':'description','parent':'parent'}
+        widgets={
+            'titre_categorie':forms.TextInput(attrs={'class':'form-control'}),
+            'desc':forms.Textarea(attrs={'class':'form-control','rows':5}),
+            'parent':forms.TextInput(attrs={'class':'form-control'}),
+        }
+
+
+
+
+
+    
 
         

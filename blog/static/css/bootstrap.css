@@ -4,6 +4,8 @@
  * Copyright 2011-2021 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
  */
+
+
 :root {
   --blue: #007bff;
   --indigo: #6610f2;
@@ -2503,6 +2505,8 @@ textarea.form-control {
   }
 }
 
+
+
 .btn {
   display: inline-block;
   font-weight: 400;
@@ -2664,9 +2668,11 @@ fieldset:disabled a.btn {
 
 .btn-info {
   color: #fff;
-  background-color: #17a2b8;
+  background: #17a2b8;
   border-color: #17a2b8;
 }
+
+
 
 .btn-info:hover {
   color: #fff;

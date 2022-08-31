@@ -8592,4 +8592,10 @@ ul.stepper li.completed a .label {
   transform: rotate(180deg);
 }
 
+.btn-default{
+  background: transparent;
+border: 2px solid rgba(24, 160, 206, 0.75);
+border-radius:60px;
+
+}
 /*# sourceMappingURL=mdb.lite.min.css.map*/

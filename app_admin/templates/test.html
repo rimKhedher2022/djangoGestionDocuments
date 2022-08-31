@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+ <div class="container">
+    <h1>{{chaine}}</h1>
+  
+        <form action="/my-admin/document_sous_category/TD" method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+                <input type="text" class="form-control" name="titre">
+            </div>
+            <div class="form-group">
+                <input type="file" class="form-control" name="fichier">
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control" name="institution">
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control" name="annee">
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control" name="matiére">
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control" name="Subcategorie">
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control" name="description">
+            </div>
+            <button type="submit" class="btn btn-success">submit</button>
+        </form>
+    
+    </div>
+</body>
+</html>

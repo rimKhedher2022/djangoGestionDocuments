@@ -1,0 +1,12 @@
+
+.btn-default {
+    font-size: 15px;
+            color: rgba(6, 28, 39, 0.75);
+            letter-spacing: 1px;
+            line-height: 15px;
+            border: 2px solid rgba(160, 139, 229, 0.75);
+            border-radius: 40px;
+            background: transparent;
+            transition: all 0.3s ease 0s;
+
+}

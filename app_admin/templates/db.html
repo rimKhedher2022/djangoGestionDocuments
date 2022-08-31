@@ -8,7 +8,7 @@
         
             <h2>Liste des sous categories </h2>
             <div class="col-md-12">
-                <a href= "{% url 'ajouter-souscategorie'%}"    class="btn btn-secondary float-right"><i class="fas fa-plus"></i>  ajouter sous categorie</a>
+                <a href= "{% url 'ajouter-souscategorie' %}"    class="btn btn-secondary float-right"><i class="fas fa-plus"></i>  ajouter sous categorie</a>
             </div>
 
             {% if liste_souscategorie %}
@@ -30,6 +30,8 @@
                         </thead>
                         <tbody>
                             {% for s in liste_souscategorie %}
+                            
+
                             <tr>
                                 <td class="h6"><a href="{% url 'document_sous_category' s.titre_categorie %}"><button class="btn btn-light">{{s.titre_categorie}}</button></a></td>
                                
@@ -42,6 +44,7 @@
                                 
                                
                             </tr>
+                            
                             {% endfor %}
                         </tbody>
                     </table>
