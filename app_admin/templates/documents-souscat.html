@@ -7,7 +7,7 @@
 {% block content%}
 
 
-<h2 class="text-center mt-4">Les documents dans la sous catégorie {{chaine}}</h2>
+<h2 class="text-center mt-4">Les documents dans le dossier <strong style="color: rgb(76, 72, 150);">{{chaine}}</strong> </h2>
 
  <style>
 
@@ -20,10 +20,11 @@
  <div class="container">
  
     <div class="row">
+    <form>
         <div>
-            <a href= "{% url 'dashboard' %}" class="btn btn-default" ><i class="fas fa-arrow-left"></i>  back</a>
+            <a  class="btn btn-default"  onclick="history.back()"><i class="fas fa-arrow-left"></i>  back</a>
         </div>
-        
+    </form>
         <div class="col-md-12">
             <a href= "{% url 'ajouter-document1' chaine %}"    class="btn btn-secondary float-right"><i class="fas fa-plus"></i>  ajouter document</a>
         </div>
@@ -41,22 +42,24 @@
                 <div class="card mt-3"> -->
        
             {% if liste_doc_soucat  %}
-
-
-            <div class="card">
+            <div>
+            <h2 class="text-center">Liste des fichiers </h2>
+            <div class="card mt-5" >
+                
+            
                 <div class="card-body">
                    
 
 
 
-                    <table class="table table-hover" style="width: 1100px;">
+                    <table class="table table-hover" style="width: 500px;" >
                         <thead>
                             <tr>
                                 <th class="h6">titre</th>
                                 <th class="h6">anneé</th>
-                                <th class="h6">matiére</th>
+                              
                                 <th class="h6">Subcategorie</th>
-                                <th class="h6">institution</th>
+                                
                                 <th class="h6">action</th>
                             </tr>
                         </thead>
@@ -65,9 +68,9 @@
                             <tr>
                                 <td class="h6"><a href="{% url 'detail' document.id %}">{{document.titre}}</a></td>
                                 <td class="h6">{{document.annee}}</td>
-                                <td class="h6">{{document.matiére}}</td>
+                               
                                 <td class="h6">{{document.Subcategorie}}</td>
-                                <td class="h6">{{document.institution}}</td>
+                               
                                 <td class="h6">
                                     <a class="btn btn-default btn-rounded btn-sm" href="{% url 'modifier-document' document.pk %}"><i class="fas fa-edit"></i></a>
                                     <a class="btn btn-danger btn-rounded btn-sm" href="{% url 'supprimer-document' document.pk %}"><i class="fas fa-trash"></i></a>
@@ -82,18 +85,26 @@
                     </table>
                 </div>
             </div>
+           </div>
+            {% else %}
+            <h2>Vous n'avez aucun fichier (pdf , word , photo ....)</h2>
+            {% endif %}
             <!-- les souscategorie ajoutées avec les documents -->
-            <div class="card">
-                <div class="card-body">
+           
+            {% if liste_finale %}
+            <div>
+            <h2 class="text-center">Liste des dossiers (soucategories) </h2>
+            <div class="card mt-5">
+                <div class="card-body ">
                    
 
 
 
-                    <table class="table table-hover" style="width: 900px;">
+                    <table class="table table-hover" style="width:500px;">
                         <thead>
                             <tr>
                                 <th class="h6">sous categorie</th>
-                                <th class="h6">parent</th>
+                                
                                 <th class="h6">action</th>
                                 
                                 
@@ -107,7 +118,7 @@
 
                             <tr>
                                 <td class="h6"><a href="{% url 'document_sous_category' s.titre_categorie %}"><button class="btn btn-light">{{s.titre_categorie}}</button></a></td>
-                                <td class="h6"><a href=""><button class="btn btn-light">{{s.parent.id}}</button></a></td>
+                                
                                
                                 <td class="h6">
                                     <a class="btn btn-default btn-rounded btn-sm" href="{% url 'modifier-souscategorie' s.pk %}"><i class="fas fa-edit"></i></a>
@@ -124,12 +135,13 @@
                     </table>
                 </div>
             </div>
-            
-            
-           
+           </div>
             {% else %}
-            <h2>Vous n'avez aucun document</h2>
+            <hr/>
+            <h2>Vous n'avez aucun dossier </h2>
+         
             {% endif %}
+          
         </div> 
               
 

@@ -35,14 +35,17 @@ def Document_sous_category(request,chaine):
     #     return redirect('login')
 
    liste_documents=Document.objects.filter(user=request.user)
-   liste_soucat=Subcategorie.objects.all() #tous les sous categorie
+   liste_soucat=Subcategorie.objects.all()
+    #tous les sous categorie
    if chaine:
          chaine=get_object_or_404(Subcategorie,titre_categorie=chaine)
          id = chaine.id
          liste_doc_soucat=liste_documents.filter(Subcategorie=chaine)
+         liste_finale=liste_soucat.filter(parent=id)
         
 
-   return render(request,'documents-souscat.html',{'liste_doc_soucat':liste_doc_soucat,'chaine':chaine,'liste_soucat':liste_soucat,'id':id})
+   return render(request,'documents-souscat.html',{'liste_doc_soucat':liste_doc_soucat,'chaine':chaine,'liste_soucat':liste_soucat,'id':id,'liste_finale':liste_finale})
+
 
 
 
