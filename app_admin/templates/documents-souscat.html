@@ -28,7 +28,7 @@
             <a href= "{% url 'ajouter-document1' chaine %}"    class="btn btn-secondary float-right"><i class="fas fa-plus"></i>  ajouter document</a>
         </div>
         <div class="col-md-12">
-            <a href= ""   class="btn btn-info float-right"><i class="fas fa-plus"></i>  ajouter categorie</a>
+            <a href= "{% url 'ajouter-souscategorie1' id %}"   class="btn btn-info float-right"><i class="fas fa-plus"></i>  ajouter categorie</a>
         </div>
        
 
@@ -93,15 +93,21 @@
                         <thead>
                             <tr>
                                 <th class="h6">sous categorie</th>
+                                <th class="h6">parent</th>
                                 <th class="h6">action</th>
                                 
                                 
                             </tr>
                         </thead>
                         <tbody>
-                            {% for s in liste_souscategorie %}
+                            {% for s in liste_soucat %}
+                            {% if s.parent.id == id %}
+                           
+                           
+
                             <tr>
                                 <td class="h6"><a href="{% url 'document_sous_category' s.titre_categorie %}"><button class="btn btn-light">{{s.titre_categorie}}</button></a></td>
+                                <td class="h6"><a href=""><button class="btn btn-light">{{s.parent.id}}</button></a></td>
                                
                                 <td class="h6">
                                     <a class="btn btn-default btn-rounded btn-sm" href="{% url 'modifier-souscategorie' s.pk %}"><i class="fas fa-edit"></i></a>
@@ -112,6 +118,7 @@
                                 
                                
                             </tr>
+                            {% endif %}
                             {% endfor %}
                         </tbody>
                     </table>

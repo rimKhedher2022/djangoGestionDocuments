@@ -22,10 +22,11 @@ class SubcategorieForm(forms.ModelForm):
         model=Subcategorie
         fields=('titre_categorie','desc')
         # if (="")
-        labels={'titre_categorie':'Titre','desc':'description'}
+        labels={'titre_categorie':'Titre','desc':'description','parent':'parent'}
         widgets={
             'titre_categorie':forms.TextInput(attrs={'class':'form-control'}),
             'desc':forms.Textarea(attrs={'class':'form-control','rows':5}),
+            'parent':forms.TextInput(attrs={'class':'form-control','rows':5}),
         }
 
 

@@ -30,6 +30,7 @@
                         </thead>
                         <tbody>
                             {% for s in liste_souscategorie %}
+                            {% if s.parent is None %}
                             
 
                             <tr>
@@ -44,7 +45,7 @@
                                 
                                
                             </tr>
-                            
+                            {% endif %}
                             {% endfor %}
                         </tbody>
                     </table>

@@ -35,13 +35,14 @@ def Document_sous_category(request,chaine):
     #     return redirect('login')
 
    liste_documents=Document.objects.filter(user=request.user)
-   liste_doc_soucat=Subcategorie.objects.all() #tous les sous categorie
+   liste_soucat=Subcategorie.objects.all() #tous les sous categorie
    if chaine:
          chaine=get_object_or_404(Subcategorie,titre_categorie=chaine)
+         id = chaine.id
          liste_doc_soucat=liste_documents.filter(Subcategorie=chaine)
         
 
-   return render(request,'documents-souscat.html',{'liste_doc_soucat':liste_doc_soucat,'chaine':chaine})
+   return render(request,'documents-souscat.html',{'liste_doc_soucat':liste_doc_soucat,'chaine':chaine,'liste_soucat':liste_soucat,'id':id})
 
 
 
@@ -155,13 +156,17 @@ class test1(LoginRequiredMixin,CreateView,request.Request):
     #     # if not request.user.has_perm('blog.supprimer-document'):
     #     #    raise PermissionDenied
     #     return super().dispatch(request, *args, **kwargs)
-    
+    #success_url= "/my-admin/"
+
+    def get_success_url(self):
+           # l'url ou je veux insérer le document (selon la souscatégorie ) subcategorie : un input trés important
+           return reverse("document_sous_category", kwargs={'chaine':self.object.parent})
    # 
    # if (model.parent is not None):
     #     def get_success_url(self):
     #         return reverse_lazy('document_sous_category', kwargs={'soucat':Subcategorie})
     # else :
-    success_url= "/my-admin/document_sous_category/TD"
+    
    
 
 
