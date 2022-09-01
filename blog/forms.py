@@ -1,5 +1,6 @@
+from email.policy import default
 from urllib.request import urlopen
-from django import forms
+from django import forms 
 from .models import Document, Subcategorie
 
 class DocumentForm(forms.ModelForm):
@@ -32,10 +33,14 @@ class SubcategorieForm(forms.ModelForm):
 
 
 class SubcategorieForm1(forms.ModelForm):
+  
+    # def __init__(self, *args, **kwargs):
+    #     super(SubcategorieForm1, self).__init__(*args, **kwargs)
+    #     self.fields['parent'].initial = '4'
+
     class Meta:
         model=Subcategorie
         fields=('titre_categorie','desc','parent')
-        # if (="")
         labels={'titre_categorie':'Titre','desc':'description','parent':'parent'}
         widgets={
             'titre_categorie':forms.TextInput(attrs={'class':'form-control'}),

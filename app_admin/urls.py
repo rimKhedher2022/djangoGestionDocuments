@@ -16,9 +16,10 @@ urlpatterns=[
     path('supprimer-souscategorie/<int:pk>',DeleteSouscategorie.as_view(),name="supprimer-souscategorie"),
     path('ajouter-souscategorie',addSouscategorie.as_view(),name="ajouter-souscategorie"),
      path('document_sous_category/<str:chaine>',Document_sous_category,name="document_sous_category"),
-     path('document_sous_category/<int:chaine>',Document_sous_category,name="document_sous_category"),
+     path('document_sous_category/<int:chaine>',Document_sous_category1,name="document_sous_category1"),
      ################################################################################################
-    path('ajouter-soucategorie1/<int:id>',test1.as_view(),name="ajouter-souscategorie1"),
+    # path('ajouter-soucategorie1/<int:id>',test1.as_view(),name="ajouter-souscategorie1"),
     #####################################################################################################
     path('ajouter-un-document/<str:chaine>',test2,name="ajouter"),
+    path('ajouter-soucategorie1/<str:id>',test2,name="ajouter-souscategorie1"),
 ]

@@ -1,5 +1,6 @@
 
 from inspect import Attribute
+from sre_constants import SUCCESS
 from urllib import request
 from django.shortcuts import render,redirect
 from django.views.generic.edit import UpdateView , CreateView,DeleteView
@@ -30,6 +31,25 @@ def user_documents(request):
 
 @login_required
 def Document_sous_category(request,chaine):
+
+    # if not request.user.is_authenticated:
+    #     return redirect('login')
+
+   liste_documents=Document.objects.filter(user=request.user)
+   liste_soucat=Subcategorie.objects.all()
+    #tous les sous categorie
+   if chaine:
+         chaine=get_object_or_404(Subcategorie,titre_categorie=chaine)
+         id = chaine.id
+         liste_doc_soucat=liste_documents.filter(Subcategorie=chaine)
+         liste_finale=liste_soucat.filter(parent=id)
+        
+
+   return render(request,'documents-souscat.html',{'liste_doc_soucat':liste_doc_soucat,'chaine':chaine,'liste_soucat':liste_soucat,'id':id,'liste_finale':liste_finale})
+
+
+@login_required
+def Document_sous_category1(request,chaine):
 
     # if not request.user.is_authenticated:
     #     return redirect('login')
@@ -116,13 +136,13 @@ class UpdateSouscategorie(LoginRequiredMixin,UpdateView):
     model = Subcategorie
     form_class = SubcategorieForm
     template_name = 'app_admin/soucategorie_form.html'
-    success_url= '/my-admin'
+    success_url= '/my-admin/'
 
 class DeleteSouscategorie(LoginRequiredMixin,DeleteView):
     model = Subcategorie
     # form_class = DocumentForm
     template_name = 'app_admin/supprimerSoucat_form.html'
-    success_url= '/my-admin'
+    success_url= '/my-admin/'
 
     def dispatch(self, request, *args, **kwargs):
         # if not request.user.has_perm('blog.supprimer-document'):
@@ -155,6 +175,12 @@ class test1(LoginRequiredMixin,CreateView,request.Request):
     model = Subcategorie
     form_class = SubcategorieForm1
     template_name= "ajouter_soucategorie1.html"
+   
+    def get_initial(self):
+        
+        return {
+                 'parent':''
+               }
     # def dispatch(self, request, *args, **kwargs):
     #     # if not request.user.has_perm('blog.supprimer-document'):
     #     #    raise PermissionDenied
@@ -164,12 +190,12 @@ class test1(LoginRequiredMixin,CreateView,request.Request):
     def get_success_url(self):
            # l'url ou je veux insérer le document (selon la souscatégorie ) subcategorie : un input trés important
            return reverse("document_sous_category", kwargs={'chaine':self.object.parent})
-   # 
-   # if (model.parent is not None):
-    #     def get_success_url(self):
-    #         return reverse_lazy('document_sous_category', kwargs={'soucat':Subcategorie})
-    # else :
+  
+    def form_valid(self,form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
     
+
    
 
 
@@ -178,22 +204,23 @@ class test1(LoginRequiredMixin,CreateView,request.Request):
 #         form.instance.user = self.request.user
 #         return super().form_valid(form)
 
-def test2(request,chaine) : 
+def test2(request,id) : 
     if request.method=="POST":
-        titre=request.POST['titre']
-        fichier=request.POST['fichier']
-        institution=request.POST['institution']
-        annee=request.POST['annee']
-        matiére=request.POST['matiére']
-        Subcategorie=request.POST['matiére']
-        description=request.POST['description']
+        
+      
+         titre_categorie=request.POST['titre_categorie']
+         desc=request.POST['desc']
+         parent=request.POST['parent']
+         
         # print(titre,institution,annee,matiére,Subcategorie,description)
-        ins=Document(titre=titre,fichier=fichier,institution=institution,annee=annee,matiére=matiére,Subcategorie=Subcategorie,description=description)
-        ins.save()
-        print('ok')
+         ins=Subcategorie(titre_categorie=titre_categorie,desc=desc,parent_id=parent)
+         ins.save()
+         return redirect("/my-admin/")
+        
 
-    print(chaine) 
-    return render(request,'test.html',{'chaine':chaine })  
+    # print(chaine) 
+    return render(request,'ajouter_soucategorie1.html',{'id':id })  
+  
     # teraja3 el kilma fil URL (exemple TD)  
     
     
