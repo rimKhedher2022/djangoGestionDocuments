@@ -4,8 +4,8 @@ from sre_constants import SUCCESS
 from urllib import request
 from django.shortcuts import render,redirect
 from django.views.generic.edit import UpdateView , CreateView,DeleteView
-from blog.models import Subcategorie, Document
-from blog.forms import DocumentForm , SubcategorieForm ,SubcategorieForm1
+from blog.models import Subcategorie, Document,Matiere,Institution
+from blog.forms import DocumentForm , SubcategorieForm ,SubcategorieForm1,MatiereForm,InstitutionForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django import forms
 from django.contrib import messages
@@ -29,6 +29,31 @@ def user_documents(request):
     liste_documents=Document.objects.filter(user=request.user)
     return render(request,'mesdocuments.html',{'liste_documents':liste_documents})
 
+
+
+@login_required    
+def user_institutions(request):
+    # if not request.user.is_authenticated:
+    #     return redirect('login')
+
+    liste_inst=Institution.objects.filter(user=request.user)
+    return render(request,'inst.html',{'liste_inst':liste_inst})
+
+    
+@login_required    
+def user_matiéres(request):
+    # if not request.user.is_authenticated:
+    #     return redirect('login')
+
+    liste_matieres=Matiere.objects.filter(user=request.user)
+    return render(request,'matiéres.html',{'liste_matieres':liste_matieres})
+    return render(request,'ajouter_docu.html',{'liste_matieres':liste_matieres})
+
+      
+
+
+
+
 @login_required
 def Document_sous_category(request,chaine):
 
@@ -48,23 +73,7 @@ def Document_sous_category(request,chaine):
    return render(request,'documents-souscat.html',{'liste_doc_soucat':liste_doc_soucat,'chaine':chaine,'liste_soucat':liste_soucat,'id':id,'liste_finale':liste_finale})
 
 
-@login_required
-def Document_sous_category1(request,chaine):
-
-    # if not request.user.is_authenticated:
-    #     return redirect('login')
-
-   liste_documents=Document.objects.filter(user=request.user)
-   liste_soucat=Subcategorie.objects.all()
-    #tous les sous categorie
-   if chaine:
-         chaine=get_object_or_404(Subcategorie,titre_categorie=chaine)
-         id = chaine.id
-         liste_doc_soucat=liste_documents.filter(Subcategorie=chaine)
-         liste_finale=liste_soucat.filter(parent=id)
-        
-
-   return render(request,'documents-souscat.html',{'liste_doc_soucat':liste_doc_soucat,'chaine':chaine,'liste_soucat':liste_soucat,'id':id,'liste_finale':liste_finale})
+# 
 
 
 
@@ -86,7 +95,7 @@ class addDocument(LoginRequiredMixin,CreateView):
 
     def get_success_url(self):
            
-           return reverse("document_sous_category", kwargs={'chaine':'TD'})
+           return reverse("mes-documents")
 
     def form_valid(self,form):
         form.instance.user = self.request.user
@@ -96,7 +105,9 @@ class addDocument1(LoginRequiredMixin,CreateView):
     
     model = Document
     form_class = DocumentForm
-    template_name= "ajouter_document.html"
+
+    template_name= "ajouter_document_selection.html"
+    # matiéres=Document.objects.filter(user=request.user)
 
     # success_url="/my-admin/document_sous_category/TD"
     
@@ -105,6 +116,43 @@ class addDocument1(LoginRequiredMixin,CreateView):
     def get_success_url(self):
            # l'url ou je veux insérer le document (selon la souscatégorie ) subcategorie : un input trés important
            return reverse("document_sous_category", kwargs={'chaine':self.object.Subcategorie})
+    # def get_success_url(self):
+    #      return reverse_lazy('document_sous_category', kwargs={'soucat': self.object.Subcategorie})
+
+    def form_valid(self,form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
+        
+class addMatiére(LoginRequiredMixin,CreateView):
+    
+    model = Matiere
+    form_class = MatiereForm
+    template_name= "ajouter_matiére.html"
+
+    # success_url="/my-admin/document_sous_category/TD"
+    
+
+    
+    def get_success_url(self):
+           # l'url ou je veux insérer le document (selon la souscatégorie ) subcategorie : un input trés important
+           return reverse("Matiéres")
+    # def get_success_url(self):
+    #      return reverse_lazy('document_sous_category', kwargs={'soucat': self.object.Subcategorie})
+
+    def form_valid(self,form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
+
+class addInstitution(LoginRequiredMixin,CreateView):
+    
+    model = Institution
+    form_class = InstitutionForm
+    template_name= "ajouter_institution.html"
+
+    # success_url="/my-admin/document_sous_category/TD"
+    def get_success_url(self):
+           # l'url ou je veux insérer le document (selon la souscatégorie ) subcategorie : un input trés important
+           return reverse("Institution")
     # def get_success_url(self):
     #      return reverse_lazy('document_sous_category', kwargs={'soucat': self.object.Subcategorie})
 
@@ -130,6 +178,44 @@ class DeleteDocument(LoginRequiredMixin,DeleteView):
         # if not request.user.has_perm('blog.supprimer-document'):
         #    raise PermissionDenied
         return super().dispatch(request, *args, **kwargs)
+
+class UpdateMatiére(LoginRequiredMixin,UpdateView):
+    model = Matiere
+    form_class = MatiereForm
+    template_name = 'app_admin/matiére_form.html'
+    success_url= '/my-admin/Matiéres'
+   
+
+class DeleteMatiére(LoginRequiredMixin,DeleteView):
+    model = Matiere
+    # form_class = DocumentForm
+    template_name = 'app_admin/sup_matiére_form.html'
+    success_url= '/my-admin/Matiéres'
+
+    def dispatch(self, request, *args, **kwargs):
+        # if not request.user.has_perm('blog.supprimer-document'):
+        #    raise PermissionDenied
+        return super().dispatch(request, *args, **kwargs)
+
+
+
+class UpdateInstitution(LoginRequiredMixin,UpdateView):
+    model = Institution
+    form_class = InstitutionForm
+    template_name = 'app_admin/institution_form.html'
+    success_url= '/my-admin/Institution'
+   
+
+class DeleteInstitution(LoginRequiredMixin,DeleteView):
+    model = Institution
+    # form_class = DocumentForm
+    template_name = 'app_admin/supprimer_institution.html'
+    success_url= '/my-admin/Institution'
+
+    def dispatch(self, request, *args, **kwargs):
+        # if not request.user.has_perm('blog.supprimer-document'):
+        #    raise PermissionDenied
+        return super().dispatch(request, *args, **kwargs)        
     
 
 class UpdateSouscategorie(LoginRequiredMixin,UpdateView):
@@ -211,17 +297,31 @@ def test2(request,id) :
          titre_categorie=request.POST['titre_categorie']
          desc=request.POST['desc']
          parent=request.POST['parent']
-         
-        # print(titre,institution,annee,matiére,Subcategorie,description)
          ins=Subcategorie(titre_categorie=titre_categorie,desc=desc,parent_id=parent)
          ins.save()
-         return redirect("/my-admin/")
-        
-
-    # print(chaine) 
+    
     return render(request,'ajouter_soucategorie1.html',{'id':id })  
   
-    # teraja3 el kilma fil URL (exemple TD)  
+     
+    
+def test3(request,id) : 
+    
+    if request.method=="POST":
+        
+         titre=request.POST['titre']
+         description=request.POST['description']
+         fichier= request.FILES.getlist('fichier')
+         institution=request.POST['Institution']
+         annee=request.POST['annee']
+         matiére_name=request.POST['matiére_name']
+         Subcategorie=request.POST['Subcategorie']
+         mat = Matiere.objects.filter(matiére=request.matiére)
+        
+         
+         ins=Document(titre=titre,description=description,fichier=fichier,institution=institution,annee=annee,matiére=mat,Subcategorie=Subcategorie)
+         ins.save()
+    
+    return render(request,'ajouter_docu.html',{'id':id ,'liste_matieres':Matiere.objects.filter(user=request.user),'liste_insti_user':Institution.objects.filter(user=request.user)}) 
     
     
 

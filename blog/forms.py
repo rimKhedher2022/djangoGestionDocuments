@@ -1,7 +1,8 @@
 from email.policy import default
+from optparse import Option
 from urllib.request import urlopen
 from django import forms 
-from .models import Document, Subcategorie
+from .models import Document, Subcategorie,Matiere,Institution
 
 class DocumentForm(forms.ModelForm):
     class Meta:
@@ -10,13 +11,15 @@ class DocumentForm(forms.ModelForm):
         labels={'titre':'Titre','description':'description','fichier':'fichier','institution':'institution','annee':'année','matiére':'matiére','Subcategorie':'Subcategorie'}
         widgets={
             'titre':forms.TextInput(attrs={'class':'form-control'}),
+            'description':forms.Textarea(attrs={'class':'form-control'}),
             'fichier':forms.FileInput(attrs={'class':'form-control'}),
             'institution':forms.TextInput(attrs={'class':'form-control'}),
             'annee':forms.TextInput(attrs={'class':'form-control'}),
-            'matiére':forms.TextInput(attrs={'class':'form-control'}),
-            'Subcategorie':forms.Select(attrs={'class':'form-control'}),
-            'description':forms.Textarea(attrs={'class':'form-control','rows':5}),
-        }
+            'matiére':forms.Select(attrs={'class':'form-control'}),
+            'matiére':forms.Select(attrs={'class':'form-control'}),
+           
+            'Subcategorie':forms.Select(attrs={'class':'form-control','rows':5}),
+        } 
 
 class SubcategorieForm(forms.ModelForm):
     class Meta:
@@ -46,6 +49,38 @@ class SubcategorieForm1(forms.ModelForm):
             'titre_categorie':forms.TextInput(attrs={'class':'form-control'}),
             'desc':forms.Textarea(attrs={'class':'form-control','rows':5}),
             'parent':forms.TextInput(attrs={'class':'form-control'}),
+        }
+
+class MatiereForm(forms.ModelForm):
+  
+    # def __init__(self, *args, **kwargs):
+    #     super(SubcategorieForm1, self).__init__(*args, **kwargs)
+    #     self.fields['parent'].initial = '4'
+
+    class Meta:
+        model=Matiere
+        fields=('matiére','filiére','coefficient')
+        labels={'matiére':'matiére','filiére':'filiére','coefficient':'coefficient'}
+        widgets={
+            'matiére':forms.TextInput(attrs={'class':'form-control'}),
+            'filiére':forms.TextInput(attrs={'class':'form-control'}),
+            'coefficient':forms.TextInput(attrs={'class':'form-control'}),
+           
+        }
+class InstitutionForm(forms.ModelForm):
+  
+    # def __init__(self, *args, **kwargs):
+    #     super(SubcategorieForm1, self).__init__(*args, **kwargs)
+    #     self.fields['parent'].initial = '4'
+
+    class Meta:
+        model=Institution
+        fields=('Institut','ville',)
+        labels={'Institut':'Institut', 'ville':'ville'}
+        widgets={
+            'Institut':forms.TextInput(attrs={'class':'form-control'}),
+            'ville':forms.TextInput(attrs={'class':'form-control'}),
+           
         }
 
 
