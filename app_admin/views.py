@@ -315,7 +315,7 @@ def test3(request,id) :
          annee=request.POST['annee']
          matiére_name=request.POST['matiére_name']
          Subcategorie=request.POST['Subcategorie']
-         mat = Matiere.objects.filter(matiére=request.matiére)
+         mat = Matiere.objects.filter(matiére=matiére_name)
         
          
          ins=Document(titre=titre,description=description,fichier=fichier,institution=institution,annee=annee,matiére=mat,Subcategorie=Subcategorie)
