@@ -300,28 +300,56 @@ def test2(request,id) :
          ins=Subcategorie(titre_categorie=titre_categorie,desc=desc,parent_id=parent)
          ins.save()
     
-    return render(request,'ajouter_soucategorie1.html',{'id':id })  
+    return render(request,'ajouter_soucategorie1.html',{'id':id})  
   
      
     
-def test3(request,id) : 
+def ajout_document(request,id) : 
     
     if request.method=="POST":
-        
+        #  user = request.user()
          titre=request.POST['titre']
          description=request.POST['description']
-         fichier= request.FILES.getlist('fichier')
+         fichier= request.FILES.get('fichier')
          institution=request.POST['Institution']
          annee=request.POST['annee']
          matiére_name=request.POST['matiére_name']
-         Subcategorie=request.POST['Subcategorie']
-         mat = Matiere.objects.filter(matiére=matiére_name)
-        
+         idsub=request.POST['Subcategorie']
+         mat=Matiere.objects.get( matiére = matiére_name)
+         sub=Subcategorie.objects.get( id = idsub)
          
-         ins=Document(titre=titre,description=description,fichier=fichier,institution=institution,annee=annee,matiére=mat,Subcategorie=Subcategorie)
+         
+         ins=Document(user=mat.user,titre=titre,description=description,fichier=fichier,institution=institution,annee=annee,Subcategorie=sub,matiére=mat)
          ins.save()
+         print('saved')
     
     return render(request,'ajouter_docu.html',{'id':id ,'liste_matieres':Matiere.objects.filter(user=request.user),'liste_insti_user':Institution.objects.filter(user=request.user)}) 
+    
+def modifier_document(request,id) : 
+    document=Document.objects.get(pk=id)
+    # mat=Matiere.objects.get( matiére = matiére_name)
+    # sub=Subcategorie.objects.get( id = idsub)
+
+    if request.method=="POST":
+        #  user = request.user()
+         titre=request.POST['titre']
+         description=request.POST['description']
+         fichier= request.FILES.get('fichier')
+         institution=request.POST['Institution']
+         annee=request.POST['annee']
+         matiére_name=request.POST['matiére_name']
+         idsub=request.POST['Subcategorie']
+         mat=Matiere.objects.get( matiére = matiére_name)
+         sub=Subcategorie.objects.get( pk = idsub)
+         
+         
+         ins=Document(user=mat.user,titre=titre,description=description,fichier=fichier,institution=institution,annee=annee,Subcategorie=sub,matiére=mat)
+         ins.save()
+    
+         
+       
+    
+    return render(request,'modifier_docu.html',{'document':document,'id':id ,'liste_matieres':Matiere.objects.filter(user=request.user),'liste_insti_user':Institution.objects.filter(user=request.user)}) 
     
     
 

@@ -14,16 +14,20 @@
               
             
                 <label for="titre_categorie">titre</label>
-                     <input name="titre">
-                <label for="description">description</label>
-                     <input name="description">
-                <label for="fichier" >fichier</label>
-                     <input name="fichier" type="file">
+                     <input name="titre" value="{{document.titre}}">
+                <label for="description" >description</label>
+                     <input name="description" value="{{document.description}}">
+                <label for="fichier">fichier</label>
+                     <input name="fichier"  value="{{document.fichier}}" type="file">
                 <label>institution</label>
                
 
                         <select name="Institution">
                            
+                            <option selected="selected">
+                                <strong>{{document.institution}}</strong>
+                                </option>
+
                             {% for i in liste_insti_user %}
                             
                             <option > {{i.Institut}} </option>
@@ -32,10 +36,15 @@
                         </select>
                      
                         <label for="annee">annee</label>
-                            <input name="annee">
+                            <input name="annee" value="{{document.annee}}">
 
                 <label for="matiére_name">matiére_name</label>
                      <select name="matiére_name" type="text">
+
+                        <option selected="selected">
+                            <strong>{{document.matiére}}</strong>
+                            </option>
+
                         {% for m in liste_matieres %}
                         <option>--------</option>
                         <option >{{m.matiére}}</option>
