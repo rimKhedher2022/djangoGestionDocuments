@@ -1,5 +1,6 @@
 
 from inspect import Attribute
+from pydoc import doc
 from sre_constants import SUCCESS
 from urllib import request
 from django.shortcuts import render,redirect
@@ -326,25 +327,18 @@ def ajout_document(request,id) :
     return render(request,'ajouter_docu.html',{'id':id ,'liste_matieres':Matiere.objects.filter(user=request.user),'liste_insti_user':Institution.objects.filter(user=request.user)}) 
     
 def modifier_document(request,id) : 
-    document=Document.objects.get(pk=id)
-    # mat=Matiere.objects.get( matiére = matiére_name)
-    # sub=Subcategorie.objects.get( id = idsub)
 
-    if request.method=="POST":
-        #  user = request.user()
-         titre=request.POST['titre']
-         description=request.POST['description']
-         fichier= request.FILES.get('fichier')
-         institution=request.POST['Institution']
-         annee=request.POST['annee']
-         matiére_name=request.POST['matiére_name']
-         idsub=request.POST['Subcategorie']
-         mat=Matiere.objects.get( matiére = matiére_name)
-         sub=Subcategorie.objects.get( pk = idsub)
+
+    document=Document.objects.get(pk=id)
+    document.titre = request.POST['titre']
+   
+    document.save(update_fields=['titre'])
+    
+    
+
+
+  
          
-         
-         ins=Document(user=mat.user,titre=titre,description=description,fichier=fichier,institution=institution,annee=annee,Subcategorie=sub,matiére=mat)
-         ins.save()
     
          
        

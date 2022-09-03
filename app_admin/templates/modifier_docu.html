@@ -13,8 +13,9 @@
                 
               
             
-                <label for="titre_categorie">titre</label>
+                <label for="titre">titre</label>
                      <input name="titre" value="{{document.titre}}">
+                     
                 <label for="description" >description</label>
                      <input name="description" value="{{document.description}}">
                 <label for="fichier">fichier</label>
@@ -52,13 +53,13 @@
                         {% endfor %}
                      </select>
                 <label for="Subcategorie">Subcategorie</label>
-                  <input name="Subcategorie" value="{{id}}">
+                  <input name="Subcategorie" value="{{document.Subcategorie.pk}}">
                      
                
            
 
                
-                <button class="btn btn-primary btn-block" >Enregistrer</button>
+                <button class="btn btn-primary btn-block" >modifier</button>
             </form>
            
        
