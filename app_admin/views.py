@@ -19,7 +19,7 @@ from django.urls import reverse_lazy , reverse
 def dashboard(request):
     #  if not request.user.is_authenticated:
     #   return redirect('login')
-     liste_souscategorie=Subcategorie.objects.all()
+     liste_souscategorie=Subcategorie.objects.filter(user=request.user)
      return render(request,'db.html',{'liste_souscategorie':liste_souscategorie})
 
 @login_required
@@ -330,7 +330,7 @@ def modifier_document(request,id) :
 
 
     document=Document.objects.get(pk=id)
-    document.titre = request.POST['titre']
+    # document.titre = request.POST['titre']
    
     document.save(update_fields=['titre'])
     

@@ -7,6 +7,7 @@ from django.urls import reverse
 
 # Create your models here.
 class Subcategorie(models.Model):
+   user=models.ForeignKey(User,on_delete=models.CASCADE,null=True) 
    titre_categorie=models.CharField(max_length=50)
    desc=models.TextField()
    parent = models.ForeignKey(
