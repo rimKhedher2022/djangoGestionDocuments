@@ -43,7 +43,7 @@ class SubcategorieForm1(forms.ModelForm):
 
     class Meta:
         model=Subcategorie
-        fields=('titre_categorie','desc','parent')
+        fields=('titre_categorie','desc','parent','user')
         labels={'titre_categorie':'Titre','desc':'description','parent':'parent'}
         widgets={
             'titre_categorie':forms.TextInput(attrs={'class':'form-control'}),

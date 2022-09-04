@@ -294,11 +294,11 @@ class test1(LoginRequiredMixin,CreateView,request.Request):
 def test2(request,id) : 
     if request.method=="POST":
         
-      
+         user=request.user
          titre_categorie=request.POST['titre_categorie']
          desc=request.POST['desc']
          parent=request.POST['parent']
-         ins=Subcategorie(titre_categorie=titre_categorie,desc=desc,parent_id=parent)
+         ins=Subcategorie(user=user,titre_categorie=titre_categorie,desc=desc,parent_id=parent)
          ins.save()
     
     return render(request,'ajouter_soucategorie1.html',{'id':id})  
@@ -348,7 +348,10 @@ def modifier_document(request,id) :
     
 
        
+def rechercher_document(request):
 
+
+    return render(request,"rechercher.html",{'liste_matieres':Matiere.objects.filter(user=request.user),'liste_insti_user':Institution.objects.filter(user=request.user),'liste_soucategorie_user':Subcategorie.objects.filter(user=request.user)})
 
 
     
