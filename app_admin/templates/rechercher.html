@@ -8,106 +8,14 @@
     <div class="row">
         <div class="col-md-12">
             <h2 class="text-center">rechercher un document </h2>
-            <form method="GET" action=".">
-                <!-- <div class="form-row">
-                    <div class="form-group col-12">
-                        <div class="input-group">
-                            <input class="form-control py-2 border-right-0 border" type="search" name="title" placeholder="Titre du document" />
-                            <span class="input-group-append">
-                                <div class="input-group-text bg-transparent">
-                                    <i class="fa fa-search"></i>
-                                </div>
-                            </span>
-                        </div>
-                    </div>        
-                </div> -->
-                <!-- <div class="form-row">
-                    <div class="form-group col-12">
-                        <div class="input-group">
-                            <input class="form-control py-2 border-right-0 border" type="search" name="description" placeholder="description" />
-                            <span class="input-group-append">
-                                <div class="input-group-text bg-transparent">
-                                    <i class="fa fa-search"></i>
-                                </div>
-                            </span>
-                        </div>
-                    </div>        
-                </div> -->
-                <div class="form-row">
-                    <div class="form-group col-12">
-                        <div class="input-group">
-                            <!-- <input class="form-control py-2 border-right-0 border" type="search" name="institution" placeholder="institution" /> -->
-                            <select  name="institution" class="form-control py-2 border-right-0 border">
-
-                                <option value="" disabled selected>choisir une institution de la liste </option>
-                                {% for i in liste_insti_user %}
-                            
-                                <option > {{i.Institut}} </option>
-                               
-                                {% endfor %}
-                            </select>
-                            <span class="input-group-append">
-                                <div class="input-group-text bg-transparent">
-                                    <i class="fa fa-search"></i>
-                                </div>
-                            </span>
-                        </div>
-                    </div>        
-                </div>
-                <div class="form-row">
-                    <div class="form-group col-12">
-                        <div class="input-group">
-                            <input class="form-control py-2 border-right-0 border" type="search" name="annee" placeholder="annee" />
-                            <span class="input-group-append">
-                                <div class="input-group-text bg-transparent">
-                                    <i class="fa fa-search"></i>
-                                </div>
-                            </span>
-                        </div>
-                    </div>        
-                </div>
-                <div class="form-row">
-                    <div class="form-group col-12">
-                        <div class="input-group">
-                            <select  name="matiére" class="form-control py-2 border-right-0 border">
-                                <option value="" disabled selected>choisir une matiére de la liste </option>
-                                {% for m in liste_matieres %}
-                               
-                                <option >{{m.matiére}}</option>
-                                
-                                {% endfor %}
-                            </select>
-                            <!-- <input class="form-control py-2 border-right-0 border" type="search" name="matiére" placeholder="matiére" /> -->
-                            <span class="input-group-append">
-                                <div class="input-group-text bg-transparent">
-                                    <i class="fa fa-search"></i>
-                                </div>
-                            </span>
-                        </div>
-                    </div>        
-                </div>
-                <div class="form-row">
-                    <div class="form-group col-12">
-                        <div class="input-group">
-                            <select  name="Subcategorie" class="form-control py-2 border-right-0 border">
-                                <option value="" disabled selected>soucategorie du document (dossier)</option>
-                                {% for s in liste_soucategorie_user %}
-                               
-                                <option >{{s.titre_categorie}}</option>
-                                
-                                {% endfor %}
-                                
-                            </select>
-                            <!-- <input class="form-control py-2 border-right-0 border" type="search" name="Subcategorie" placeholder="Subcategorie" /> -->
-                            <span class="input-group-append">
-                                <div class="input-group-text bg-transparent">
-                                    <i class="fa fa-search"></i>
-                                </div>
-                            </span>
-                        </div>
-                    </div>        
-                </div>
-             
+            <form method="GET" action="">
+        {{myFilter.form}}
+                
+               
+              
+               
+                
+               
              
                 
                 <button type="submit" class="btn btn-primary">Search</button>
@@ -115,7 +23,33 @@
        
 
         </div>
+        
+  
+       
+        {% for m in documents %}
+       
+      
+       <div>{{m.titre}} </div>
+      
+         
+        {% endfor %}
+
+        
+        
+       
+
+
+
+       
+        
+       
+      
     </div>
+   
+   
+  
+
+ 
 </div>
 
 {% endblock %}

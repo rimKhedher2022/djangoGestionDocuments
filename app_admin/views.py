@@ -2,6 +2,7 @@
 from inspect import Attribute
 from pydoc import doc
 from sre_constants import SUCCESS
+
 from urllib import request
 from django.shortcuts import render,redirect
 from django.views.generic.edit import UpdateView , CreateView,DeleteView
@@ -15,6 +16,7 @@ from django.core.exceptions import PermissionDenied
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404
 from django.urls import reverse_lazy , reverse
+from blog.filters import DocumentFilter
 
 def dashboard(request):
     #  if not request.user.is_authenticated:
@@ -74,20 +76,13 @@ def Document_sous_category(request,chaine):
    return render(request,'documents-souscat.html',{'liste_doc_soucat':liste_doc_soucat,'chaine':chaine,'liste_soucat':liste_soucat,'id':id,'liste_finale':liste_finale})
 
 
-# 
 
 
-
-
-
-
-
-
-
-
-class addDocument(LoginRequiredMixin,CreateView):
+class addDocument(LoginRequiredMixin,CreateView,request.Request):
     model = Document
     form_class = DocumentForm
+
+        
     template_name= "ajouter_document.html"
 
     #success_url="/my-admin/mes-documents" 
@@ -106,7 +101,6 @@ class addDocument1(LoginRequiredMixin,CreateView):
     
     model = Document
     form_class = DocumentForm
-
     template_name= "ajouter_document_selection.html"
     # matiéres=Document.objects.filter(user=request.user)
 
@@ -304,27 +298,41 @@ def test2(request,id) :
     return render(request,'ajouter_soucategorie1.html',{'id':id})  
   
      
+
+
+       #  titre=request.POST['titre']
+        #  description=request.POST['description']
+        #  fichier= request.FILES.get('fichier')
+        #  institution=request.POST['Institution']
+        #  annee=request.POST['annee']
+        #  matiére_name=request.POST['matiére_name']
+        #  idsub=request.POST['Subcategorie']
+        #  mat=Matiere.objects.get( matiére = matiére_name)
+        #  sub=Subcategorie.objects.get( id = idsub)
+        #  inst=Institution.objects.get( Institut = institution)
+         
+         
+        #  ins=Document(user=mat.user,titre=titre,description=description,fichier=fichier,institution=inst,annee=annee,Subcategorie=sub,matiére=mat)
+        #  ins.save()
+       
+          
+    # return render(request,'ajouter_docu.html',{'id':id ,'liste_matieres':Matiere.objects.filter(user=request.user),'liste_insti_user':Institution.objects.filter(user=request.user)}) 
     
 def ajout_document(request,id) : 
-    
-    if request.method=="POST":
-        #  user = request.user()
-         titre=request.POST['titre']
-         description=request.POST['description']
-         fichier= request.FILES.get('fichier')
-         institution=request.POST['Institution']
-         annee=request.POST['annee']
-         matiére_name=request.POST['matiére_name']
-         idsub=request.POST['Subcategorie']
-         mat=Matiere.objects.get( matiére = matiére_name)
-         sub=Subcategorie.objects.get( id = idsub)
-         
-         
-         ins=Document(user=mat.user,titre=titre,description=description,fichier=fichier,institution=institution,annee=annee,Subcategorie=sub,matiére=mat)
-         ins.save()
-         print('saved')
-    
-    return render(request,'ajouter_docu.html',{'id':id ,'liste_matieres':Matiere.objects.filter(user=request.user),'liste_insti_user':Institution.objects.filter(user=request.user)}) 
+    if request.method=='POST':
+         form1 = DocumentForm(request.user,request.FILES,request.POST)
+         if form1.is_valid():
+            d = form1.save()
+            d.user = request.user
+            
+            d.save()
+            return redirect('mes-documents')
+    else:
+          form1 = DocumentForm(request.user)
+      
+    return render(request,'ajouter_docu.html',{'id':id,'form':form1}) 
+
+
     
 def modifier_document(request,id) : 
 
@@ -349,9 +357,14 @@ def modifier_document(request,id) :
 
        
 def rechercher_document(request):
+    documents=Document.objects.filter(user=request.user)
+    # formFiltre = DocumentFilter(user=request.user)
+    myFilter=DocumentFilter(request.GET,queryset=documents) 
+    documents=myFilter.qs
+    
 
-
-    return render(request,"rechercher.html",{'liste_matieres':Matiere.objects.filter(user=request.user),'liste_insti_user':Institution.objects.filter(user=request.user),'liste_soucategorie_user':Subcategorie.objects.filter(user=request.user)})
+   
+    return render(request,"rechercher.html",{'myFilter':myFilter, 'documents':documents})
 
 
     

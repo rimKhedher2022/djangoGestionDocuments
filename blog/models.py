@@ -65,7 +65,7 @@ class Document(models.Model):
    
     description=models.TextField()
     fichier=models.FileField(null=True)
-    institution=models.CharField(max_length=50 ,null=True, blank=True)
+    institution=models.ForeignKey(Institution,on_delete=models.CASCADE,null=True, blank=True)
     # un document appartient a plusieurs institution , une institution a plusieurs documents
     annee=models.CharField(max_length=4,null=True, blank=True)
     matiére=models.ForeignKey(Matiere,on_delete=models.CASCADE,null=True, blank=True)
