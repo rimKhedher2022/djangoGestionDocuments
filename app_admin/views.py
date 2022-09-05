@@ -319,18 +319,20 @@ def test2(request,id) :
     # return render(request,'ajouter_docu.html',{'id':id ,'liste_matieres':Matiere.objects.filter(user=request.user),'liste_insti_user':Institution.objects.filter(user=request.user)}) 
     
 def ajout_document(request,id) : 
-    if request.method=='POST':
-         form1 = DocumentForm(request.user,request.FILES,request.POST)
-         if form1.is_valid():
-            d = form1.save()
-            d.user = request.user
+    ####################################danger#############################################
+    form=DocumentForm(user=request.user) # rod balik tebadil minnou 7arf wa7id , RODBALI 
+    ##########################################################################################
+    # if request.method=='POST':
+    #      form = DocumentForm(request.user,request.FILES,request.POST)
+    #      if form.is_valid():
+
+    #           form.save()
+    #           return redirect('mes-documents')
             
-            d.save()
-            return redirect('mes-documents')
-    else:
-          form1 = DocumentForm(request.user)
+    # else:
+    #       form = DocumentForm
       
-    return render(request,'ajouter_docu.html',{'id':id,'form':form1}) 
+    return render(request,'ajouter_docu.html',{'id':id,'form':form}) 
 
 
     
