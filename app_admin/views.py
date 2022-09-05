@@ -327,7 +327,9 @@ def ajout_document(request,id) :
         # form.user=request.user
         if form.is_valid():
              i=form.save(commit=False)
-             i.user=request.user
+             ##########################
+             i.user=request.user 
+             ########################
              i.save()
              return redirect('mes-documents')
             
