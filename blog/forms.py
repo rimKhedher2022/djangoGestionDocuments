@@ -3,7 +3,7 @@ from optparse import Option
 from urllib import request
 from urllib.request import urlopen
 from django import forms 
-from .models import Document, Subcategorie,Matiere,Institution
+from .models import Document, Subcategorie,Matiere,Institution,User
 
 
 
@@ -33,7 +33,7 @@ class DocumentForm(forms.ModelForm):
         self.fields['Subcategorie'].queryset = Subcategorie.objects.filter(user=user)
         self.fields['institution'].queryset = Institution.objects.filter(user=user)
         self.fields['matiére'].queryset = Matiere.objects.filter(user=user)   
-        
+      
 
 
 

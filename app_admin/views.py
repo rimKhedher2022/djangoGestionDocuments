@@ -3,6 +3,7 @@ from inspect import Attribute
 from pydoc import doc
 from sre_constants import SUCCESS
 
+
 from urllib import request
 from django.shortcuts import render,redirect
 from django.views.generic.edit import UpdateView , CreateView,DeleteView
@@ -81,7 +82,6 @@ def Document_sous_category(request,chaine):
 class addDocument(LoginRequiredMixin,CreateView,request.Request):
     model = Document
     form_class = DocumentForm
-
         
     template_name= "ajouter_document.html"
 
@@ -322,15 +322,17 @@ def ajout_document(request,id) :
     ####################################danger#############################################
     form=DocumentForm(user=request.user) # rod balik tebadil minnou 7arf wa7id , RODBALI 
     ##########################################################################################
-    # if request.method=='POST':
-    #      form = DocumentForm(request.user,request.FILES,request.POST)
-    #      if form.is_valid():
-
-    #           form.save()
-    #           return redirect('mes-documents')
+    if request.method=='POST':
+        form = DocumentForm(request.user,request.POST,request.FILES)
+        # form.user=request.user
+        if form.is_valid():
+             i=form.save(commit=False)
+             i.user=request.user
+             i.save()
+             return redirect('mes-documents')
             
     # else:
-    #       form = DocumentForm
+    #      form = DocumentForm(user=request.user)
       
     return render(request,'ajouter_docu.html',{'id':id,'form':form}) 
 
