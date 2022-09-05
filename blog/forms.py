@@ -14,7 +14,6 @@ class DocumentForm(forms.ModelForm):
     class Meta:
         model=Document
         fields=('titre','description','fichier','institution','annee','matiére','Subcategorie')
-
         labels={'titre':'Titre','description':'description','fichier':'fichier','institution':'institution','annee':'année','matiére':'matiére','Subcategorie':'Subcategorie'}
         widgets={  
                     'titre':forms.TextInput(attrs={'class':'form-control'}),
@@ -23,8 +22,6 @@ class DocumentForm(forms.ModelForm):
                     'institution':forms.Select(attrs={'class':'form-control'}),
                     'annee':forms.TextInput(attrs={'class':'form-control'}),
                     'matiére':forms.Select(attrs={'class':'form-control'}),
-                    'matiére':forms.Select(attrs={'class':'form-control'}),
-                
                     'Subcategorie':forms.Select(attrs={'class':'form-control','rows':5}),
         } 
 

@@ -363,14 +363,15 @@ def modifier_document(request,id) :
 
        
 def rechercher_document(request):
+    form=DocumentForm(user=request.user)
     documents=Document.objects.filter(user=request.user)
-    # formFiltre = DocumentFilter(user=request.user)
-    myFilter=DocumentFilter(request.GET,queryset=documents) 
-    documents=myFilter.qs
+    MyFilter= DocumentFilter(request.GET,queryset=documents)
+    documents=MyFilter.qs
+ 
     
 
    
-    return render(request,"rechercher.html",{'myFilter':myFilter, 'documents':documents})
+    return render(request,"rechercher.html",{'MyFilter':MyFilter,'documents':documents})
 
 
     
