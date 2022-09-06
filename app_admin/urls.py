@@ -35,6 +35,7 @@ urlpatterns=[
     path('ajouter-soucategorie1/<str:id>',test2,name="ajouter-souscategorie1"),
     ############        AJOUT D UNE SOUCATEGORIE (la seoeur) ###################
     path('ajouter-docu/<str:id>',ajout_document,name="ajouter-docu"),
+    path('ajouter-docu',ajout_d,name="ajouter-docu"),
     path('modifier-docu/<str:id>',modifier_document,name="modifier-docu"),
     path('rechercher-docu',rechercher_document,name="rechercher-docu"),
     # path('ajouter-doc',test3,name="ajouter-doc"),

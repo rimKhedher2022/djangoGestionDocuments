@@ -339,6 +339,26 @@ def ajout_document(request,id) :
       
     return render(request,'ajouter_docu.html',{'id':id,'form':form}) 
 
+def ajout_d(request) : 
+    ####################################danger#############################################
+    form=DocumentForm(user=request.user) # rod balik tebadil minnou 7arf wa7id , RODBALI 
+    ##########################################################################################
+    if request.method=='POST':
+        form = DocumentForm(request.user,request.POST,request.FILES)
+        # form.user=request.user
+        if form.is_valid():
+             i=form.save(commit=False)
+             ##########################
+             i.user=request.user 
+             ########################
+             i.save()
+             return redirect('mes-documents')
+            
+    # else:
+    #      form = DocumentForm(user=request.user)
+      
+    return render(request,'ajouter_docu.html',{'form':form}) 
+
 
     
 def modifier_document(request,id) : 

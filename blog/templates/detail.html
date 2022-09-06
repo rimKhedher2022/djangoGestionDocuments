@@ -12,7 +12,7 @@
 
         </div>
         <div class="col-md-4">
-            <h3 class="mt-2">Les autres document dans la plateforme :</h3>
+            <h3 class="mt-2">Les autres document dans {{Subcategorie.id}} :</h3>
             <div class="row">
 
                 
@@ -20,6 +20,7 @@
                     {%for doc in der %}
                      
                        {% if doc.id != document.id %}
+                       {% if doc.Subcategorie.id == document.Subcategorie.id %}
                        <div style="width:600px; height:150px;" class="card mb-2"  >
                       <div class="col-4 col-md-8 mb-1">
                         
@@ -30,6 +31,7 @@
                         <a href="{{doc.fichier.url}}">{{doc.fichier}}</a>
                       </div>
                     </div>
+                      {% endif %}
                       {% endif %}
                     {%endfor%}
 

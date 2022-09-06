@@ -21,9 +21,9 @@ def home(request):
 def detail(request,id_document):
     document=Document.objects.get(id=id_document)
     Subcategorie=document.Subcategorie
-    documents_en_relations= Document.objects.filter(Subcategorie=Subcategorie)
+    documents_en_relations = Document.objects.filter(Subcategorie=Subcategorie)
    
-    return render(request,"detail.html",{"document":document,"der":documents_en_relations})
+    return render(request,"detail.html",{"document":document,"der":documents_en_relations,'Subcategorie':Subcategorie})
     
 # def look(fichier,word):
         
