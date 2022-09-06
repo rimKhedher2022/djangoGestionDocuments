@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-fo8m9l=y_jg%k8d8855fhw4zcehck7$j(9l%ec6brvn#%^m%k9
 DEBUG = True
 
 ALLOWED_HOSTS = ['127.0.0.1','3e62-41-227-207-101.eu.ngrok.io']
-
+# AUTH_USER_MODEL = 'app_auth.Account'
 
 # Application definition
 

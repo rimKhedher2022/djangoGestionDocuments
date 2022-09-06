@@ -9,7 +9,7 @@
         <div class="col-md-12">
             <h2 class="text-center">rechercher un document </h2>
             <form method="GET" action="">
-        {{MyFilter.form}}
+            {{MyFilter.form}}
                 
                
               
@@ -25,12 +25,19 @@
         </div>
         
   
-       
+        <h1 class="text-center col-md-12">les documents :</h1>
         {% for m in documents %}
        
-      
-       <div>{{m.titre}} </div>
-      
+    <div style="width:600px; height:150px;" class="card mb-2 ml-0.5 col-4"  >
+        <div class="col-12" style="background-color: rgb(229, 255, 229);">
+           
+            <h1>{{m.titre}}</h1>
+            <a style="font-size: 25px ;color: rgb(78, 67, 83); " href="{{ m.fichier.url }}">link</a>
+            <p>{{m.description}}</p>
+
+        </div>
+    </div>    
+    
          
         {% endfor %}
 
