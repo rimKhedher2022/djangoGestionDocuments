@@ -14,6 +14,11 @@ urlpatterns=[
     path('ajouter-document1/<str:chaine>',addDocument1.as_view(),name="ajouter_document_selection"),  
     ###################################################################################
     path('modifier-document/<int:pk>',UpdateDocument.as_view(),name="modifier-document"),
+
+    ###############################################################MODIFIER UN DOCUMENT (les documents de l'utilisatuer)
+    path('modifier-docu/<int:id>',modifier_docu,name="modifier-docu"),#<------- fonction modifier un document 
+    ####################################################################################
+
     path('supprimer-document/<int:pk>',DeleteDocument.as_view(),name="supprimer-document"),
    
     path('modifier-matiére/<int:pk>',UpdateMatiére.as_view(),name="modifier-matiere"),
@@ -36,7 +41,7 @@ urlpatterns=[
     ############        AJOUT D UNE SOUCATEGORIE (la seoeur) ###################
     path('ajouter-docu/<str:id>',ajout_document,name="ajouter-docu"),
     path('ajouter-docu',ajout_d,name="ajouter-docu"),
-    path('modifier-docu/<str:id>',modifier_document,name="modifier-docu"),
+    # path('modifier-docu/<str:id>',modifier_document,name="modifier-docu"),
     path('rechercher-docu',rechercher_document,name="rechercher-docu"),
     # path('ajouter-doc',test3,name="ajouter-doc"),
 ]

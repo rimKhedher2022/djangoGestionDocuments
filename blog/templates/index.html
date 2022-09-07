@@ -22,7 +22,7 @@
           <h6>{{document.matiére}}</h6>
           
           <p >Publié il y'a {{document.created_at|timesince}}</p>
-          <a href="{% url 'detail' document.id %}" class="btn btn-primary">lire la suite</a>
+          <a href="{% url 'document_detail' document.id %}" class="btn btn-primary">lire la suite</a>
         </div>
       </div>
     </div>

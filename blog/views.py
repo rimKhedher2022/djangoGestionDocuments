@@ -24,6 +24,14 @@ def detail(request,id_document):
     documents_en_relations = Document.objects.filter(Subcategorie=Subcategorie)
    
     return render(request,"detail.html",{"document":document,"der":documents_en_relations,'Subcategorie':Subcategorie})
+
+
+
+def document_detail(request,id_document):
+
+    document=Document.objects.get(id=id_document)
+    documents_dans_palteforme = Document.objects.all()
+    return render(request,"detail2.html",{"document":document,"der":documents_dans_palteforme})
     
 # def look(fichier,word):
         

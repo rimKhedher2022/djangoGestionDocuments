@@ -157,7 +157,7 @@ class addInstitution(LoginRequiredMixin,CreateView):
         return super().form_valid(form)
         
 
-class UpdateDocument(LoginRequiredMixin,UpdateView):
+class UpdateDocument(LoginRequiredMixin,UpdateView ):
     model = Document
     form_class = DocumentForm
     template_name = 'app_admin/document_form.html'
@@ -358,6 +358,28 @@ def ajout_d(request) :
     #      form = DocumentForm(user=request.user)
       
     return render(request,'ajouter_docu.html',{'form':form}) 
+
+
+def modifier_docu(request,id) : 
+    document=Document.objects.get(pk=id)
+    ####################################danger#############################################
+    form=DocumentForm(user=request.user,instance=document) # rod balik tebadil minnou 7arf wa7id , RODBALI 
+    ##########################################################################################
+    if request.method=='POST':
+        form = DocumentForm(request.user,request.POST,request.FILES,instance=document)
+        # form.user=request.user
+        if form.is_valid():
+             i=form.save(commit=False)
+             ##########################
+             i.user=request.user 
+             ########################
+             i.save()
+             return redirect('mes-documents')
+        
+            
+  
+      
+    return render(request,'modifier_docu.html',{'id':id,'form':form}) 
 
 
     

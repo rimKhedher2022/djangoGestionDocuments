@@ -13,20 +13,8 @@
         <li class="nav-item">
           <a class="nav-link" href="{% url 'mes-documents' %}">Mon Compte</a>
         </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Matiéres
-          </a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="#">Action</a>
-          
-           
-            
-          </div>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link disabled" href="#">Disabled</a>
-        </li>
+        
+       
       </ul>
       {% if user.is_authenticated %}
       <a href="{% url 'logout' %}" class="btn btn-primary">déconnexion</a>
@@ -35,7 +23,7 @@
       {% endif %}
      
       <form class="form-inline my-2 my-lg-0" action="{% url 'search' %}">
-        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="document">
+        <input class="form-control mr-sm-2" type="search" placeholder="tapez le nom du document " style="width:300px ;" aria-label="Search" name="document">
         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
       </form>
     </div>

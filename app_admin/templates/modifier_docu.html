@@ -7,59 +7,33 @@
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-            <h2 class="text-center">ajout d'un document {{id}}</h2>
+            <h2 class="text-center">modifier d'un document {{id}}</h2>
             <form action="" method="POST" enctype="multipart/form-data">
                 {% csrf_token %}
-                
+                {{form}}
               
             
-                <label for="titre">titre</label>
-                     <input name="titre" value="{{document.titre}}">
+                
                      
-                <label for="description" >description</label>
-                     <input name="description" value="{{document.description}}">
-                <label for="fichier">fichier</label>
-                     <input name="fichier"  value="{{document.fichier}}" type="file">
-                <label>institution</label>
+              
                
 
-                        <select name="Institution">
-                           
-                            <option selected="selected">
-                                <strong>{{document.institution}}</strong>
-                                </option>
-
-                            {% for i in liste_insti_user %}
-                            
-                            <option > {{i.Institut}} </option>
-                           
-                            {% endfor %}
-                        </select>
-                     
-                        <label for="annee">annee</label>
-                            <input name="annee" value="{{document.annee}}">
-
-                <label for="matiére_name">matiére_name</label>
-                     <select name="matiére_name" type="text">
-
-                        <option selected="selected">
-                            <strong>{{document.matiére}}</strong>
-                            </option>
-
-                        {% for m in liste_matieres %}
-                        <option>--------</option>
-                        <option >{{m.matiére}}</option>
                         
-                        {% endfor %}
-                     </select>
-                <label for="Subcategorie">Subcategorie</label>
-                  <input name="Subcategorie" value="{{document.Subcategorie.pk}}">
                      
+                     
+                            
+
+                
+
+                  
+
+                     
+              
                
            
 
                
-                <button class="btn btn-primary btn-block" >modifier</button>
+                <input class="btn btn-primary btn-block" type="submit" value="modifier" >
             </form>
            
        

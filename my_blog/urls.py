@@ -19,12 +19,13 @@ from django.urls import path,include
 from django.conf import settings
 from django.conf.urls.static import static
 
-from blog.views import home,detail,search
+from blog.views import home,detail,search,document_detail
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',home,name="home"),
     path('document/<int:id_document>',detail,name="detail"),
+    path('document_detail/<int:id_document>',document_detail,name="document_detail"),
     path('document/recherche',search,name="search"),
     path('auth/',include('app_auth.urls')),
     path('my-admin/',include('app_admin.urls')),
