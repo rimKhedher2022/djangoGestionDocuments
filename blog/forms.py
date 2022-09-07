@@ -3,7 +3,7 @@ from optparse import Option
 from urllib import request
 from urllib.request import urlopen
 from django import forms 
-from .models import Document, Subcategorie,Matiere,Institution,User
+from .models import Document, Subcategorie,Matiere,Institution,Année
 
 
 
@@ -20,16 +20,18 @@ class DocumentForm(forms.ModelForm):
                     'description':forms.Textarea(attrs={'class':'form-control'}),
                     'fichier':forms.FileInput(attrs={'class':'form-control'}),
                     'institution':forms.Select(attrs={'class':'form-control'}),
-                    'annee':forms.TextInput(attrs={'class':'form-control'}),
+                    'annee':forms.Select(attrs={'class':'form-control'}),  
                     'matiére':forms.Select(attrs={'class':'form-control'}),
                     'Subcategorie':forms.Select(attrs={'class':'form-control','rows':5}),
         } 
 
     def __init__(self, user, *args, **kwargs):
         super(DocumentForm, self).__init__(*args, **kwargs)
+        self.fields['annee'].queryset = Année.objects.filter(user=user) 
         self.fields['Subcategorie'].queryset = Subcategorie.objects.filter(user=user)
         self.fields['institution'].queryset = Institution.objects.filter(user=user)
         self.fields['matiére'].queryset = Matiere.objects.filter(user=user)   
+        
       
 
 
@@ -45,6 +47,17 @@ class SubcategorieForm(forms.ModelForm):
             'titre_categorie':forms.TextInput(attrs={'class':'form-control'}),
             'desc':forms.Textarea(attrs={'class':'form-control','rows':5}),
             'parent':forms.TextInput(attrs={'class':'form-control','rows':5}),
+        }
+
+class AnnéeForm(forms.ModelForm):
+    class Meta:
+        model=Année
+        fields=('annee',)
+        # if (="")
+        labels={'annee':'année'}
+        widgets={
+            'annee':forms.TextInput(attrs={'class':'form-control'}),
+            
         }
 
 

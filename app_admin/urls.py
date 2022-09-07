@@ -7,9 +7,11 @@ urlpatterns=[
     path('mes-documents',user_documents,name="mes-documents"),
     path('Institution',user_institutions,name="Institution"),
     path('Matiéres',user_matiéres,name="Matiéres"),
+    path('Années',user_années,name="Années"),
     path('ajouter-document',addDocument.as_view(),name="ajouter-document"),
     path('ajouter-matiére',addMatiére.as_view(),name="ajouter-matiére"),
     path('ajouter-institution',addInstitution.as_view(),name="ajouter-institution"),
+    path('ajouter-année',addAnnée.as_view(),name="ajouter-année"),
      ####################################################################################
     path('ajouter-document1/<str:chaine>',addDocument1.as_view(),name="ajouter_document_selection"),  
     ###################################################################################
@@ -26,6 +28,9 @@ urlpatterns=[
 
     path('modifier-institution/<int:pk>',UpdateInstitution.as_view(),name="modifier-institution"),
     path('supprimer-institution/<int:pk>',DeleteInstitution.as_view(),name="supprimer-institution"),
+
+    path('modifier-année/<int:pk>',UpdateAnnée.as_view(),name="modifier-année"),
+    path('supprimer-année/<int:pk>',DeleteAnnée.as_view(),name="supprimer-année"),
    
     path('modifier-souscategorie/<int:pk>',UpdateSouscategorie.as_view(),name="modifier-souscategorie"),
     path('supprimer-souscategorie/<int:pk>',DeleteSouscategorie.as_view(),name="supprimer-souscategorie"),

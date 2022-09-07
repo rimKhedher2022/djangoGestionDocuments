@@ -50,11 +50,21 @@ class Matiere(models.Model):
         return reverse("les-matiéres")     
 
 
+class Année(models.Model):
+   user=models.ForeignKey(User,on_delete=models.CASCADE,null=True)
+   annee=models.CharField(max_length=50,null=True, blank=True)
+   
+  
+  
 
-product_status=[
-    (1,'kilma'),
-    (2,'wa7da')
-]
+   def __str__ (self):
+    return self.annee  
+
+   def get_absolute_url(self):
+        return reverse("les-années")     
+
+
+
         
 
 
@@ -67,8 +77,9 @@ class Document(models.Model):
     fichier=models.FileField(null=True)
     institution=models.ForeignKey(Institution,on_delete=models.CASCADE,null=True, blank=True)
     # un document appartient a plusieurs institution , une institution a plusieurs documents
-    annee=models.CharField(max_length=4,null=True, blank=True)
+    annee=models.ForeignKey(Année,on_delete=models.CASCADE,null=True, blank=True)
     matiére=models.ForeignKey(Matiere,on_delete=models.CASCADE,null=True, blank=True)
+  
     # une matiéres a plusieurs documents , un document appartient a une seule matiére
     created_at=models.DateTimeField(auto_now_add=True)
     updated_at=models.DateTimeField(auto_now=True)

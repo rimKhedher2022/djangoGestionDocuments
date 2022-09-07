@@ -8,8 +8,8 @@ from sre_constants import SUCCESS
 from urllib import request
 from django.shortcuts import render,redirect
 from django.views.generic.edit import UpdateView , CreateView,DeleteView
-from blog.models import Subcategorie, Document,Matiere,Institution
-from blog.forms import DocumentForm , SubcategorieForm ,SubcategorieForm1,MatiereForm,InstitutionForm
+from blog.models import Subcategorie, Document,Matiere,Institution, Année
+from blog.forms import DocumentForm , SubcategorieForm ,SubcategorieForm1,MatiereForm,InstitutionForm,AnnéeForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django import forms
 from django.contrib import messages
@@ -52,7 +52,15 @@ def user_matiéres(request):
 
     liste_matieres=Matiere.objects.filter(user=request.user)
     return render(request,'matiéres.html',{'liste_matieres':liste_matieres})
-    return render(request,'ajouter_docu.html',{'liste_matieres':liste_matieres})
+
+@login_required    
+def user_années(request):
+    # if not request.user.is_authenticated:
+    #     return redirect('login')
+
+    liste_années=Année.objects.filter(user=request.user)
+    return render(request,'années.html',{'liste_années':liste_années})
+   
 
       
 
@@ -155,6 +163,24 @@ class addInstitution(LoginRequiredMixin,CreateView):
     def form_valid(self,form):
         form.instance.user = self.request.user
         return super().form_valid(form)
+
+
+class addAnnée(LoginRequiredMixin,CreateView):
+    
+    model = Année
+    form_class = AnnéeForm
+    template_name= "ajouter_année.html"
+
+    # success_url="/my-admin/document_sous_category/TD"
+    def get_success_url(self):
+           # l'url ou je veux insérer le document (selon la souscatégorie ) subcategorie : un input trés important
+           return reverse("Années")
+    # def get_success_url(self):
+    #      return reverse_lazy('document_sous_category', kwargs={'soucat': self.object.Subcategorie})
+
+    def form_valid(self,form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
         
 
 class UpdateDocument(LoginRequiredMixin,UpdateView ):
@@ -207,6 +233,24 @@ class DeleteInstitution(LoginRequiredMixin,DeleteView):
     # form_class = DocumentForm
     template_name = 'app_admin/supprimer_institution.html'
     success_url= '/my-admin/Institution'
+
+    def dispatch(self, request, *args, **kwargs):
+        # if not request.user.has_perm('blog.supprimer-document'):
+        #    raise PermissionDenied
+        return super().dispatch(request, *args, **kwargs)    
+
+class UpdateAnnée(LoginRequiredMixin,UpdateView):
+    model = Année
+    form_class = AnnéeForm
+    template_name = 'app_admin/année_form.html'
+    success_url= '/my-admin/Années'
+   
+
+class DeleteAnnée(LoginRequiredMixin,DeleteView):
+    model = Année
+    # form_class = DocumentForm
+    template_name = 'app_admin/supprimer_année.html'
+    success_url= '/my-admin/Années'
 
     def dispatch(self, request, *args, **kwargs):
         # if not request.user.has_perm('blog.supprimer-document'):

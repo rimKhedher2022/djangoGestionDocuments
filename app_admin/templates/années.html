@@ -1,0 +1,80 @@
+
+{% extends 'partials/base.html'%}
+
+
+{% block content%}
+
+    
+ 
+  
+
+<h2 class="text-center mt-4">Les années</h2>
+ <div class="container">
+    <div class="row">
+        
+        <div class="col-md-12">
+            <a href= "{% url  'ajouter-année' %}"    class="btn btn-secondary float-right"><i class="fas fa-plus"></i>  ajouter année </a>
+        </div>
+
+         
+            
+<!--             
+            <div class="col-md-12"> 
+
+            
+                <div class="card mt-3"> -->
+       
+            {% if liste_années %}
+
+
+            <div class="card">
+                <div class="card-body">
+                   
+
+
+
+                    <table class="table table-hover" style="width: 1100px;">
+                        <thead>
+                            <tr>
+                                <th class="h6">année</th>
+                                
+                                <th class="h6">action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for m in liste_années %}
+                            <tr>
+                               
+                                <td class="h6">{{m.annee}}</td>
+                                
+                                <td class="h6">
+                                    <a class="btn btn-default btn-rounded btn-sm" href="{% url 'modifier-année' m.pk %}"><i class="fas fa-edit"></i></a>
+                                    <a class="btn btn-danger btn-rounded btn-sm" href="{% url 'supprimer-année' m.pk %}"><i class="fas fa-trash"></i></a>
+                                   
+    
+                                 </td>
+                                
+                               
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+           
+            
+            
+           
+            {% else %}
+            <h2>Vous n'avez aucune année (ajoutez une année )</h2>
+            {% endif %}
+        </div> 
+              
+
+
+
+             
+
+   
+</div>
+{% endblock %}

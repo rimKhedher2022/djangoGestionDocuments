@@ -36,11 +36,15 @@ class DocumentFilter(django_filters.FilterSet):
         widget=forms.Select(attrs={'class': 'form-control'}),
     )
 
-    annee = django_filters.CharFilter(
-        lookup_expr='icontains',
-        widget=forms.TextInput(attrs={'class': 'form-control'}),
-       #bech nebadlouha
+    annee = django_filters.ModelChoiceFilter(
+        field_name='annee', 
+        queryset=Année.objects.all(),
+        # queryset=Subcategorie.objects.get(user=request.user),
+        # Subcategorie_id__in=Subcategorie.objects.get(user=request.user),
+        widget=forms.Select(attrs={'class': 'form-control'}),
     )
+
+ 
 
     description = django_filters.CharFilter(
         lookup_expr='icontains',
