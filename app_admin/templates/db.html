@@ -2,16 +2,17 @@
 
 
 {% block content%}
+<h2 class="text-center mt-4">Liste des dossiers </h2>
 <div class="container">
     <div class="row">
 
         
-            <h2>Liste des sous categories </h2>
+            
             <div class="col-md-12">
                 <a href= "{% url 'ajouter-souscategorie' %}"    class="btn btn-secondary float-right"><i class="fas fa-plus"></i>  ajouter sous categorie</a>
             </div>
             <div class="col-md-12">
-                <a href= "{% url 'rechercher-docu' %}"    class="btn btn-info float-right"><i class="fas fa-search"></i> rechercher un document </a>
+                <a href= "{% url 'rechercher-docu' %}"    class="btn btn-info  float-right"><i class="fas fa-search"></i> rechercher un document </a>
             </div>
 
             {% if liste_souscategorie %}
@@ -25,8 +26,8 @@
                     <table class="table table-hover" style="width: 900px;">
                         <thead>
                             <tr>
-                                <th class="h6">sous categorie</th>
-                                <th class="h6">action</th>
+                                <th class="h6">Nom du dossier </th>
+                                <th class="h6">actions</th>
                                 
                                 
                             </tr>
@@ -37,7 +38,7 @@
                             
 
                             <tr>
-                                <td class="h6"><a href="{% url 'document_sous_category' s.titre_categorie %}"><button class="btn btn-light">{{s.titre_categorie}}</button></a></td>
+                                <td class="h6"><a href="{% url 'document_sous_category' s.titre_categorie %}"><button class="btn btn-light"> <i class="fa fa-folder" style="font-size:16px ;color:rgb(95, 112, 147)"></i> {{s.titre_categorie}}</button></a></td>
                                
                                 <td class="h6">
                                     <a class="btn btn-default btn-rounded btn-sm" href="{% url 'modifier-souscategorie' s.pk %}"><i class="fas fa-edit"></i></a>

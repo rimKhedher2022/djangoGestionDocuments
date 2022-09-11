@@ -1,14 +1,14 @@
-{% extends 'base.html' %}
+{% extends 'partials/base.html'%}
 
 {% block content %}
 
 <div class="container">
     <div class="row">
         <div class="col-md-8">
-            <h1 class="text-center mt-2">detail du document</h1>
-            <h1>{{document.titre}}</h1>
-            <a href="{{ document.fichier.url }}">link</a>
-            <p>{{document.description}}</p>
+            <h1 class="text-center mt-2">Detail du document</h1>
+            <h2>Nom : {{document.titre}}</h2>
+            <a href="{{ document.fichier.url }}">lien du document</a>
+            <p>Description : {{document.description}}</p>
 
         </div>
         <div class="col-md-4">

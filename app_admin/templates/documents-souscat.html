@@ -21,15 +21,23 @@
  
     <div class="row">
     <form>
+        {% if chaine.parent is not None%}
         <div>
-            <a  class="btn btn-default"  onclick="history.back()"><i class="fas fa-arrow-left"></i>  back</a>
+            
+            <a  class="btn btn-default" href= "{% url 'document_sous_category' chaine.parent %}" ><i class="fas fa-arrow-left"></i>  back</a>
         </div>
+        {% else %}
+        <div>
+            
+            <a  class="btn btn-default" href= "{% url 'dashboard' %}" ><i class="fas fa-arrow-left"></i>  back</a>
+        </div>
+        {% endif %}
     </form>
         <div class="col-md-12">
-            <a href= "{% url 'ajouter-docu' id %}"    class="btn btn-secondary float-right"><i class="fas fa-plus"></i>  ajouter document</a>
+            <a href= "{% url 'ajouter-docu' id %}"    class="btn btn-secondary float-right"><i class="fas fa-plus"></i>  ajouter un document</a>
         </div>
         <div class="col-md-12">
-            <a href= "{% url 'ajouter-souscategorie1' id %}"   class="btn btn-info float-right"><i class="fas fa-plus"></i>  ajouter categorie</a>
+            <a href= "{% url 'ajouter-souscategorie1' id %}"   class="btn btn-info float-right"><i class="fas fa-plus"></i>  ajouter un dossier </a>
         </div>
        
 
@@ -55,21 +63,19 @@
                     <table class="table table-hover" style="width: 500px;" >
                         <thead>
                             <tr>
-                                <th class="h6">titre</th>
-                                <th class="h6">anneé</th>
+                                <th class="h6">Nom du fichier </th>
                               
-                                <th class="h6">Subcategorie</th>
                                 
-                                <th class="h6">action</th>
+                                <th class="h6">actions</th>
                             </tr>
                         </thead>
                         <tbody>
                             {% for document in liste_doc_soucat%}
                             <tr>
-                                <td class="h6"><a href="{% url 'detail' document.id %}">{{document.titre}}</a></td>
-                                <td class="h6">{{document.annee}}</td>
+                                <td class="h6"> <a href="{% url 'detail' document.id %}">{{document.titre}}</a></td>
+                                <!-- <td class="h6">{{document.annee}}</td> -->
                                
-                                <td class="h6">{{document.Subcategorie}}</td>
+                                <!-- <td class="h6">{{document.Subcategorie}}</td> -->
                                
                                 <td class="h6">
                                     <a class="btn btn-default btn-rounded btn-sm" href="{% url 'modifier-docu' document.pk %}"><i class="fas fa-edit"></i></a>
@@ -103,9 +109,9 @@
                     <table class="table table-hover" style="width:500px;">
                         <thead>
                             <tr>
-                                <th class="h6">sous categorie</th>
+                                <th class="h6"> Nom du dossier</th>
                                 
-                                <th class="h6">action</th>
+                                <th class="h6">actions</th>
                                 
                                 
                             </tr>
@@ -117,7 +123,7 @@
                            
 
                             <tr>
-                                <td class="h6"><a href="{% url 'document_sous_category' s.titre_categorie %}"><button class="btn btn-light">{{s.titre_categorie}}</button></a></td>
+                                <td class="h6"><a href="{% url 'document_sous_category' s.titre_categorie %}"><button class="btn btn-light"><i class="fa fa-folder" style="font-size:16px ;color:rgb(95, 112, 147)"></i> {{s.titre_categorie}}</button></a></td>
                                 
                                
                                 <td class="h6">
