@@ -337,8 +337,12 @@ def test2(request,id) :
          titre_categorie=request.POST['titre_categorie']
          desc=request.POST['desc']
          parent=request.POST['parent']
+        #  parent_sub = Subcategorie.objects.filter(id=parent)
+         obj=get_object_or_404(Subcategorie,id=parent)
+        #  parent_sub_name = parent_sub.titre_categorie
          ins=Subcategorie(user=user,titre_categorie=titre_categorie,desc=desc,parent_id=parent)
          ins.save()
+         return redirect('document_sous_category',chaine=obj.titre_categorie)
     
     return render(request,'ajouter_soucategorie1.html',{'id':id})  
   

@@ -46,8 +46,13 @@ class SubcategorieForm(forms.ModelForm):
         widgets={
             'titre_categorie':forms.TextInput(attrs={'class':'form-control'}),
             'desc':forms.Textarea(attrs={'class':'form-control','rows':5}),
-            'parent':forms.TextInput(attrs={'class':'form-control','rows':5}),
+            # 'parent':forms.TextInput(attrs={'class':'form-control','rows':5}),
         }
+
+        # def __init__(self, user, *args, **kwargs):
+
+        #     super(SubcategorieForm, self).__init__(*args, **kwargs)
+        #     (self.fields['parent'].widget).initial_value = ""
 
 class AnnéeForm(forms.ModelForm):
     class Meta:

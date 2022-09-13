@@ -11,7 +11,7 @@ from django.core.files.storage import default_storage
 
 def home(request):
     
-    list_documents=Document.objects.all()
+    list_documents=Document.objects.filter(user=request.user)
     context={"liste_documents":list_documents}
  
     return render(request,"index.html",context)
@@ -30,7 +30,7 @@ def detail(request,id_document):
 def document_detail(request,id_document):
 
     document=Document.objects.get(id=id_document)
-    documents_dans_palteforme = Document.objects.all()
+    documents_dans_palteforme = Document.objects.filter(user=request.user)
     return render(request,"detail2.html",{"document":document,"der":documents_dans_palteforme})
     
 # def look(fichier,word):

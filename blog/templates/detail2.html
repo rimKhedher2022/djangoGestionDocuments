@@ -5,10 +5,11 @@
 <div class="container">
     <div class="row">
         <div class="col-md-8">
-            <h1 class="text-center mt-2">detail du document</h1>
-            <h1>{{document.titre}}</h1>
-            <a href="{{ document.fichier.url }}">link</a>
-            <p>{{document.description}}</p>
+            <h1 class="text-center mt-2">Detail du document</h1>
+
+            <h1>Titre : {{document.titre}}</h1>
+            lien du document :<a href="{{document.fichier.url }}"> link</a>
+            <p>Description : {{document.description}}</p>
 
         </div>
         <div class="col-md-4">
@@ -24,11 +25,11 @@
                        <div style="width:600px; height:150px;" class="card mb-2"  >
                       <div class="col-4 col-md-8 mb-1">
                         
-                       <a href="{{doc.id}}"><strong>{{doc.titre}}</strong></a>
+                       <a href="{{doc.id}}"><strong>Titre : {{doc.titre}}</strong></a>
 
                       </div>
                       <div class="col-12">
-                        <a href="{{doc.fichier.url}}">{{doc.fichier}}</a>
+                        <a href="{{doc.fichier.url}}"> {{doc.fichier}}</a>
                       </div>
                     </div>
                       {% endif %}

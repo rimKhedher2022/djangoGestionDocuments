@@ -12,8 +12,8 @@
                 {% csrf_token %}
                 
               
-                <label for="parent">Emplacement du dossier</label>
-                     <input name="parent" value="{{id}}">
+                <!-- <label for="parent">Emplacement du dossier</label> -->
+                     <input hidden name="parent" value="{{id}}">
                 <label for="titre_categorie">Nom du dossier</label>
                      <input name="titre_categorie">
                 <label for="desc">description  du dossier</label>
