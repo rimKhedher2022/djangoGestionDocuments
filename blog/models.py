@@ -12,10 +12,12 @@ class Subcategorie(models.Model):
    desc=models.TextField()
    parent = models.ForeignKey(
         'self',
-        on_delete=models.SET_NULL,
+        on_delete=models.CASCADE,
+        # on_delete=models.SET_NULL,
         related_name="children",
         null=True,
         blank=True,
+        
     )
     
 

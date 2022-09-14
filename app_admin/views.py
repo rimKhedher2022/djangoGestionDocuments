@@ -301,7 +301,10 @@ class DeleteSouscategorie(LoginRequiredMixin,DeleteView):
             # obj=get_object_or_404(Subcategorie,titre_categorie=self.object.parent)
             Subcategorie.objects.filter(parent=self.object.id).delete()
             return reverse_lazy('dashboard') 
+        # if (self.object.parent is not None):
+
         obj=get_object_or_404(Subcategorie,titre_categorie=self.object.parent)
+        Subcategorie.objects.filter(parent=self.object.id).delete()
         return reverse_lazy('document_sous_category', kwargs={'chaine': obj.titre_categorie})
 
 
