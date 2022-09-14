@@ -5,10 +5,13 @@
     <div class="row">
         <form action="" method="POST">
             {% csrf_token %}
-            <p>Voulez vous supprimer ce document ? ({{object}})</p>
+            <p>Voulez vous supprimer cet catégorie ? ({{object}})</p>
             <input type="submit" value="supprimer" class="btn btn-danger">
-            <a href="" class="btn btn-primary ">annuler</a>
-
+            {% if object.parent is not None %}
+            <a href="{% url 'document_sous_category' object.parent %}" class="btn btn-primary ">annuler</a>
+            {% else %}
+            <a href="{% url 'dashboard' %}" class="btn btn-primary ">annuler</a>
+            {% endif %}
         </form>
     </div>
 </div>

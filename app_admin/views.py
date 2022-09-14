@@ -1,5 +1,7 @@
 
+from ast import Return
 from cgi import test
+
 from inspect import Attribute
 from pydoc import doc
 from sre_constants import SUCCESS
@@ -194,7 +196,11 @@ class DeleteDocument(LoginRequiredMixin,DeleteView):
     model = Document
     # form_class = DocumentForm
     template_name = 'app_admin/supprimer_form.html'
-    success_url= '/my-admin/mes-documents'
+    # success_url= '/my-admin/mes-documents'
+    def get_success_url(self):
+        # obj=get_object_or_404(Subcategorie,titre_categorie=self.object.Subcategorie)
+        # return reverse_lazy('document_sous_category', kwargs={'chaine': self.object.titre_categorie})
+        return reverse_lazy('document_sous_category', kwargs={'chaine': self.object.Subcategorie})
 
     def dispatch(self, request, *args, **kwargs):
         # if not request.user.has_perm('blog.supprimer-document'):
@@ -262,20 +268,59 @@ class UpdateSouscategorie(LoginRequiredMixin,UpdateView):
     model = Subcategorie
     form_class = SubcategorieForm
     template_name = 'app_admin/soucategorie_form.html'
-    success_url= '/my-admin/'
+    # success_url: 'my-admin/'
+    def get_success_url(self):
+        if (self.object.parent is None):
 
+          
+            return reverse_lazy('dashboard') 
+            
+
+        obj=get_object_or_404(Subcategorie,titre_categorie=self.object.parent)
+      
+        
+           
+     
+        return reverse_lazy('document_sous_category', kwargs={'chaine': obj.titre_categorie})
+        
+     
+            
+        
+
+########################################################### ici un code important ######################
 class DeleteSouscategorie(LoginRequiredMixin,DeleteView):
     model = Subcategorie
     # form_class = DocumentForm
     template_name = 'app_admin/supprimerSoucat_form.html'
-    success_url= '/my-admin/'
+    
+
+    def get_success_url(self):
+       
+       
+        if (self.object.parent is None):
+            # obj=get_object_or_404(Subcategorie,titre_categorie=self.object.parent)
+            Subcategorie.objects.filter(parent=self.object.id).delete()
+            return reverse_lazy('dashboard') 
+        obj=get_object_or_404(Subcategorie,titre_categorie=self.object.parent)
+        return reverse_lazy('document_sous_category', kwargs={'chaine': obj.titre_categorie})
+
+
+    # def get_success_url(self):
+        
+        # obj=get_object_or_404(Subcategorie,titre_categorie=self.object.parent)
+        # # return reverse_lazy('document_sous_category', kwargs={'chaine': self.object.titre_categorie})
+        # return reverse_lazy('document_sous_category', kwargs={'chaine': obj.titre_categorie})
+    # success_url = reverse_lazy('document_sous_category',)
+    # def get_absolute_url(self):
+
+        # return reverse('document_sous_category', kwargs={'chaine':})
 
     def dispatch(self, request, *args, **kwargs):
         # if not request.user.has_perm('blog.supprimer-document'):
         #    raise PermissionDenied
         return super().dispatch(request, *args, **kwargs)    
 
-
+####################################################################### fin code important #############
 
 class addSouscategorie(LoginRequiredMixin,CreateView):
     model = Subcategorie
@@ -380,7 +425,15 @@ def ajout_document(request,id) :
              i.user=request.user 
              ########################
              i.save()
+            #  obj = get_object_or_404(Subcategorie,titre_categorie=i.Subcategorie)
+            #  return reverse_lazy('document_sous_category', kwargs={'chaine':i.Subcategorie})
+            #  nom=i.Subcategorie
+             
+        # obj=get_object_or_404(Subcategorie,titre_categorie=self.object.parent)
+             
+      
              return redirect('mes-documents')
+          
             
     # else:
     #      form = DocumentForm(user=request.user)
