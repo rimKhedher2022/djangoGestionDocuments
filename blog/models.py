@@ -75,7 +75,7 @@ class Document(models.Model):
     user=models.ForeignKey(User,on_delete=models.CASCADE,null=True) 
     titre=models.CharField(max_length=50)
    
-    description=models.TextField()
+    description=models.TextField(null=True, blank=True)
     fichier=models.FileField(null=True)
     institution=models.ForeignKey(Institution,on_delete=models.CASCADE,null=True, blank=True)
     # un document appartient a plusieurs institution , une institution a plusieurs documents

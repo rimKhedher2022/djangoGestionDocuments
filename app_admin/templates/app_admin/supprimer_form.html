@@ -7,7 +7,7 @@
             {% csrf_token %}
             <p>Voulez vous supprimer ce document ? ({{object}})</p>
             <input type="submit" value="supprimer" class="btn btn-danger">
-            <a href="{% url 'mes-documents' %}" class="btn btn-primary ">annuler</a>
+            <a href="{% url 'document_sous_category' object.Subcategorie %}" class="btn btn-info ">annuler</a>
 
         </form>
     </div>

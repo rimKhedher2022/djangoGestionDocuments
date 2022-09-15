@@ -1,0 +1,64 @@
+{% extends 'partials/base.html'%}
+
+
+
+{% block content%}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h2 class="text-center">ajout d'un document :</h2>
+            <form action="" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+
+                {{form}}
+                
+              
+            
+                <!-- <label for="titre_categorie">titre</label>
+                     <input name="titre">
+                <label for="description">description</label>
+                     <input name="description">
+                <label for="fichier" >fichier</label>
+                     <input name="fichier" type="file">
+                <label>institution</label>
+               
+
+                        <select name="Institution">
+                           
+                            {% for i in liste_insti_user %}
+                            
+                            <option > {{i.Institut}} </option>
+                           
+                            {% endfor %}
+                        </select>
+                     
+                        <label for="annee">annee</label>
+                            <input name="annee">
+
+                <label for="matiére_name">matiére_name</label>
+                     <select name="matiére_name" type="text">
+                        {% for m in liste_matieres %}
+                        <option>--------</option>
+                        <option >{{m.matiére}}</option>
+                        
+                        {% endfor %}
+                     </select>
+                <label for="Subcategorie">Subcategorie</label>
+                  <input name="Subcategorie" value="{{id}}">
+                     
+                -->
+                      
+
+               
+                <input type="submit" class="btn btn-primary" value="enregistrer">
+                <a href="{% url 'mes-documents' %}" class="btn btn-danger ">annuler</a>
+            </form>
+           
+       
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}

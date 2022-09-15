@@ -416,9 +416,28 @@ def test2(request,id) :
     # return render(request,'ajouter_docu.html',{'id':id ,'liste_matieres':Matiere.objects.filter(user=request.user),'liste_insti_user':Institution.objects.filter(user=request.user)}) 
     
 def ajout_document(request,id) : 
+    bechnarja3=get_object_or_404(Subcategorie,id=id)
+
+
+
+
+
     ####################################danger#############################################
     form=DocumentForm(user=request.user) # rod balik tebadil minnou 7arf wa7id , RODBALI 
     ##########################################################################################
+
+
+    annes_par_defaut= Année.objects.filter(user=request.user).last()
+    matiere_par_defaut= Matiere.objects.filter(user=request.user).last()
+    institut_par_defaut= Institution.objects.filter(user=request.user).last()
+    # dossier_par_defaut = Subcategorie.objects.filter(id=id)
+    obj=get_object_or_404(Subcategorie,id=id)
+    form.fields['annee'].initial = annes_par_defaut
+    form.fields['matiére'].initial = matiere_par_defaut
+    form.fields['institution'].initial = institut_par_defaut
+    form.fields['institution'].initial = institut_par_defaut
+    form.fields['Subcategorie'].initial = obj
+
     if request.method=='POST':
         form = DocumentForm(request.user,request.POST,request.FILES)
         # form.user=request.user
@@ -428,25 +447,37 @@ def ajout_document(request,id) :
              i.user=request.user 
              ########################
              i.save()
-            #  obj = get_object_or_404(Subcategorie,titre_categorie=i.Subcategorie)
-            #  return reverse_lazy('document_sous_category', kwargs={'chaine':i.Subcategorie})
-            #  nom=i.Subcategorie
-             
-        # obj=get_object_or_404(Subcategorie,titre_categorie=self.object.parent)
-             
-      
              return redirect('mes-documents')
+
+            #  return reverse_lazy('document_sous_category',kwargs={'chaine':bechnarja3.titre_categorie})
+
+      
+             
+             
+           
           
             
     # else:
     #      form = DocumentForm(user=request.user)
       
-    return render(request,'ajouter_docu.html',{'id':id,'form':form}) 
+    return render(request,'ajouter_docu.html',{'id':id,'form':form , 'bechnarja3':bechnarja3}) 
 
 def ajout_d(request) : 
+ 
     ####################################danger#############################################
     form=DocumentForm(user=request.user) # rod balik tebadil minnou 7arf wa7id , RODBALI 
     ##########################################################################################
+    annes_par_defaut= Année.objects.filter(user=request.user).last()
+    matiere_par_defaut= Matiere.objects.filter(user=request.user).last()
+    institut_par_defaut= Institution.objects.filter(user=request.user).last()
+    form.fields['annee'].initial = annes_par_defaut
+    form.fields['matiére'].initial = matiere_par_defaut
+    form.fields['institution'].initial = institut_par_defaut
+    # form.fields['description'].initial = "ecrivez la description de votre document s'il vous plait"
+   
+    
+
+    # form.fields['annee'].initial = get_object_or_404(Année,id=4)
     if request.method=='POST':
         form = DocumentForm(request.user,request.POST,request.FILES)
         # form.user=request.user
@@ -461,7 +492,7 @@ def ajout_d(request) :
     # else:
     #      form = DocumentForm(user=request.user)
       
-    return render(request,'ajouter_docu.html',{'form':form}) 
+    return render(request,'ajouter_docu1.html',{'form':form }) 
 
 
 def modifier_docu(request,id) : 
@@ -512,6 +543,8 @@ def modifier_document(request,id) :
 def rechercher_document(request):
     form=DocumentForm(user=request.user)
     documents=Document.objects.filter(user=request.user)
+    # status_filter = status_list.filter(user=request.user)
+    # MyFilter= DocumentFilter(request.GET,queryset=documents)
     MyFilter= DocumentFilter(request.GET,queryset=documents)
     documents=MyFilter.qs
  
